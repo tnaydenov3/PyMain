@@ -14,9 +14,9 @@ class Loggable:
 
     @classmethod
     def logfunction(cls, func: FunctionType) -> FunctionType:
-        def wrapper(*args, **kwargs) -> None:
-            message = func(*args, **kwargs)
-            cls._log_msg(message=message)
+        def wrapper(self: "Loggable", *args, **kwargs) -> None:
+            message = func(self, *args, **kwargs)
+            self._log_msg(message=message)
 
         return wrapper
 
