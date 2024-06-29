@@ -3,6 +3,8 @@ from solutions.path.path import Path
 
 _ERR_FILE_MISSING = "File {path} does not exist!"
 
+_SKIP_ALRD_EXISTS = "File {path} already exists, skipping."
+
 _MSG_DELETE_FILE = "{path} deleted."
 _MSG_ABORT_FILE = "File {path} aborted. (error: {error})"
 _MSG_WORK_BEGIN = "Beginning {action} on <{path}>..."
@@ -39,14 +41,6 @@ class FileHandler(Loggable):
     def path(self) -> str:
         return str(object=self._target_path)
 
-    def delete_target_path(self) -> None:
-        self._target_path.delete_path()
-        self._log_deleted()
-
-    def abort_target_path(self, error: Exception) -> None:
-        self._target_path.delete_path()
-        self._log_aborted(error=error)
-
     def exists(self) -> bool:
         return self._target_path.exists()
 
@@ -56,10 +50,36 @@ class FileHandler(Loggable):
     def target_path_suffix(self) -> str:
         return self._target_path.suffix
 
+    def delete_target_path(self) -> None:
+        self._target_path.delete_path()
+        self._log_deleted()
+
+    def abort_target_path(self, error: Exception) -> None:
+        self._target_path.delete_path()
+        self._log_aborted(error=error)
+
+    def _handle(self, force: bool = False) -> None:
+        if not self.exists() and not force:
+            self._log_skipping()
+            return
+
+        try:
+            self._log_work_begin()
+            self._handle_work()
+            self._log_work_finished(action=self._cl_action())
+
+        except Exception as error:
+            self._log_aborted(error=error)
+
     @Loggable.logfunction
     def _log_missing(self) -> str:
         path = self._target_path.os_path
         return _ERR_FILE_MISSING.format(path=path)
+
+    @Loggable.logfunction
+    def _log_skipping(self) -> str:
+        path = self._target_path.os_path
+        return _SKIP_ALRD_EXISTS.format(path=path)
 
     @Loggable.logfunction
     def _log_deleted(self) -> str:
