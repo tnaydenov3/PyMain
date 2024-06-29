@@ -1,7 +1,10 @@
 import threading
+import time
 
 
 class Animation(threading.Thread):
+
+    _UPDATE_DELAY = 0.1
 
     __slots__ = ("_base_msg", "_track_var")
 
@@ -25,8 +28,16 @@ class Animation(threading.Thread):
     def msg(self) -> str:
         return self._base_msg.format(self._track_var)
 
+    def _log_to_console(self) -> None:
+        raise NotImplementedError
+
+    def _update(self) -> None:
+        raise NotImplementedError
+
     def run(self) -> None:
-        pass
+        while True:
+            time.sleep(self._UPDATE_DELAY)
+            self._update()
 
     def stop(self) -> None:
         self.join()
