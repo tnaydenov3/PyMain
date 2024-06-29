@@ -46,11 +46,11 @@ class FileHandler(Loggable):
         return self._target_path.suffix
 
     @Loggable.logfunction
-    def _log_missing(self) -> None:
+    def _log_missing(self) -> str:
         path = self._target_path.os_path
-        self._log_msg(message=_ERR_FILE_MISSING.format(path=path))
+        return _ERR_FILE_MISSING.format(path=path)
 
     @Loggable.logfunction
-    def _log_deleted(self) -> None:
+    def _log_deleted(self) -> str:
         path = self._target_path.os_path
-        self._log_msg(message=_MSG_DELETE_FILE.format(path=path))
+        return _MSG_DELETE_FILE.format(path=path)
