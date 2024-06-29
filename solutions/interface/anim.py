@@ -8,12 +8,13 @@ class Animation(threading.Thread):
 
     _UPDATE_DELAY = 0.1
 
-    __slots__ = ("_base_msg", "_prefix", "_track_var")
+    __slots__ = ("_base_msg", "_prefix", "_track_var", "_stop_event")
 
     def __init__(self, *, base_msg: str, prefix: str, track_var: int) -> None:
         self._base_msg = base_msg
         self._prefix = prefix
         self._track_var = track_var
+        self._stop_event = threading.Event()
         super().__init__()
 
     def __repr__(self) -> str:
@@ -47,10 +48,11 @@ class Animation(threading.Thread):
 
     def run(self) -> None:
         self._log_msg()
-        while True:
+        while not self._stop_event.is_set():
             time.sleep(self._UPDATE_DELAY)
             self._update()
 
     def stop(self) -> None:
-        self._update()
+        self._stop_event.set()
         self.join()
+        self._update()
