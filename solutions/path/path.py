@@ -73,6 +73,13 @@ class Path:
         with open(file=self.os_path, mode="r", encoding=encoding) as file:
             return file.read()
 
+    def list_dir(self) -> list["Path"]:
+        if self.is_dir():
+            subpaths = os.listdir(path=self.os_path)
+            return [Path(path_parts=self.path_parts + [path]) for path in subpaths]
+        else:
+            return []
+
     @classmethod
     def from_string(cls, path_str: str) -> "Path":
         normalized_path = cls._str_to_default_sep(path_str=path_str)
