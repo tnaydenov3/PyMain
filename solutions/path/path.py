@@ -20,8 +20,20 @@ class Path:
         return self._path_parts
 
     @property
+    def dir_parts(self) -> list[str]:
+        return self._path_parts[:-1]
+
+    @property
     def os_path(self) -> str:
         return os.sep.join(self._path_parts)
+
+    @property
+    def os_dir(self) -> str:
+        return os.sep.join(self._path_parts[:-1])
+
+    @property
+    def filename(self) -> str:
+        return self._path_parts[-1]
 
     @property
     def suffix(self) -> str:
