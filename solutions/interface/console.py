@@ -1,10 +1,10 @@
 import sys
 
+_UTIL_PREV_LINE = "\033[F"
+_UTIL_CLEAR_PREV_LINE = "\033[F\033[K"
+
 
 class ConsoleLogger:
-
-    _UTIL_PREV_LINE = "\033[F"
-    _UTIL_CLEAR_PREV_LINE = "\033[F\033[K"
 
     _LOG_TEMP = "[{prefix}] {message}"
 
@@ -21,7 +21,7 @@ class ConsoleLogger:
 
     @classmethod
     def clear_last_line(cls) -> None:
-        cls._log_to_console(message=cls._UTIL_CLEAR_PREV_LINE, newline=False)
+        cls._log_to_console(message=_UTIL_CLEAR_PREV_LINE, newline=False)
 
     __slots__ = tuple()
 
