@@ -3,6 +3,8 @@ from solutions.path.path import Path
 
 _ERR_FILE_MISSING = "File {path} does not exist!"
 
+_MSG_DELETE_FILE = "{path} deleted."
+
 
 class FileHandler(Loggable):
 
@@ -26,7 +28,29 @@ class FileHandler(Loggable):
     def os_path(self) -> str:
         return self._target_path.os_path
 
+    @property
+    def path(self) -> str:
+        return str(object=self._target_path)
+
+    def delete_target_path(self) -> None:
+        self._target_path.delete_path()
+        self._log_deleted()
+
+    def exists(self) -> bool:
+        return self._target_path.exists()
+
+    def target_filename(self) -> str:
+        return self._target_path.filename
+
+    def target_path_suffix(self) -> str:
+        return self._target_path.suffix
+
     @Loggable.logfunction
     def _log_missing(self) -> None:
         path = self._target_path.os_path
         self._log_msg(message=_ERR_FILE_MISSING.format(path=path))
+
+    @Loggable.logfunction
+    def _log_deleted(self) -> None:
+        path = self._target_path.os_path
+        self._log_msg(message=_MSG_DELETE_FILE.format(path=path))
