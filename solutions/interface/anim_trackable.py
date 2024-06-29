@@ -1,11 +1,8 @@
-from typing import Any
-
-
 class AnimTrackable:
 
     __slots__ = ("_value",)
 
-    def __init__(self, value: Any) -> None:
+    def __init__(self, value: object) -> None:
         self._value = value
 
     def __repr__(self) -> str:
