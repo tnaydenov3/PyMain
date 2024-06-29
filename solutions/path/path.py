@@ -1,17 +1,18 @@
 import os
 
+UNIX_SEP = "/"
+WINDOWS_SEP = "\\"
+
 
 class Path:
-    UNIX_SEP = "/"
-    WINDOWS_SEP = "\\"
 
     _DEFAULT_SEP = UNIX_SEP
 
     @classmethod
     def _str_to_default_sep(cls, path_str: str) -> str:
         norm_path = os.path.normpath(path=path_str)
-        norm_path = norm_path.replace(cls.UNIX_SEP, cls._DEFAULT_SEP)
-        norm_path = norm_path.replace(cls.WINDOWS_SEP, cls._DEFAULT_SEP)
+        norm_path = norm_path.replace(UNIX_SEP, cls._DEFAULT_SEP)
+        norm_path = norm_path.replace(WINDOWS_SEP, cls._DEFAULT_SEP)
 
         return norm_path
 
