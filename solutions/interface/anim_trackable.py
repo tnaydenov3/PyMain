@@ -9,6 +9,9 @@ class AnimTrackable:
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} ({self._value}: {self._val_type})>"
 
+    def __str__(self) -> str:
+        return str(object=self._value)
+
     @property
     def value(self) -> object:
         return self._value
