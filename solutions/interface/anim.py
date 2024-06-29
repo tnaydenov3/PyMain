@@ -43,7 +43,7 @@ class Animation(threading.Thread):
         self._log_msg()
 
     def _update(self) -> None:
-        raise NotImplementedError
+        self._log_update()
 
     def run(self) -> None:
         self._log_msg()
@@ -52,4 +52,5 @@ class Animation(threading.Thread):
             self._update()
 
     def stop(self) -> None:
+        self._update()
         self.join()
