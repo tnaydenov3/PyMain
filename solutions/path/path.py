@@ -2,7 +2,18 @@ import os
 
 
 class Path:
-    _DEFAULT_SEP = "/"
+    UNIX_SEP = "/"
+    WINDOWS_SEP = "\\"
+
+    _DEFAULT_SEP = UNIX_SEP
+
+    @classmethod
+    def _str_to_default_sep(cls, path_str: str) -> str:
+        norm_path = os.path.normpath(path=path_str)
+        norm_path = norm_path.replace(cls.UNIX_SEP, cls._DEFAULT_SEP)
+        norm_path = norm_path.replace(cls.WINDOWS_SEP, cls._DEFAULT_SEP)
+
+        return norm_path
 
     __slots__ = ("_path_parts",)
 
@@ -37,13 +48,20 @@ class Path:
 
     @property
     def suffix(self) -> str:
-        return self._path_parts[-1].split(".")[-1]
+        return self._path_parts[-1].split(sep=".")[-1]
 
     def delete_path(self) -> None:
-        os.remove(self.os_path)
+        os.remove(path=self.os_path)
 
     def exists(self) -> bool:
-        return os.path.exists(self.os_path)
+        return os.path.exists(path=self.os_path)
 
     def is_dir(self) -> bool:
-        return os.path.isdir(self.os_path)
+        return os.path.isdir(s=self.os_path)
+
+    @classmethod
+    def from_string(cls, path_str: str) -> "Path":
+        normalized_path = cls._str_to_default_sep(path_str=path_str)
+        path_parts = normalized_path.split(sep=cls._DEFAULT_SEP)
+
+        return cls(path_parts=path_parts)
