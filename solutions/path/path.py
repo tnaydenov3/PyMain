@@ -20,5 +20,9 @@ class Path:
         return self._path_parts
 
     @property
-    def path(self) -> str:
+    def os_path(self) -> str:
         return os.sep.join(self._path_parts)
+
+    @property
+    def suffix(self) -> str:
+        return self._path_parts[-1].split(".")[-1]
