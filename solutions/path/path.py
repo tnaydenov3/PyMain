@@ -59,6 +59,17 @@ class Path:
     def is_dir(self) -> bool:
         return os.path.isdir(s=self.os_path)
 
+    def dir_path(self) -> "Path":
+        return Path(path_parts=self.dir_parts)
+
+    def write(self, content: str, encoding: str = "utf-8") -> None:
+        with open(file=self.os_path, mode="w", encoding=encoding) as file:
+            file.write(content=content)
+
+    def read(self, encoding: str = "utf-8") -> str:
+        with open(file=self.os_path, mode="r", encoding=encoding) as file:
+            return file.read()
+
     @classmethod
     def from_string(cls, path_str: str) -> "Path":
         normalized_path = cls._str_to_default_sep(path_str=path_str)
