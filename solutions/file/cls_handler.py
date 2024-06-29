@@ -4,7 +4,7 @@ from solutions.path.path import Path
 _ERR_FILE_MISSING = "File {path} does not exist!"
 
 _MSG_DELETE_FILE = "{path} deleted."
-_MSG_ABORT_FILE = "File {path} aborted."
+_MSG_ABORT_FILE = "File {path} aborted. (error: {error})"
 
 
 class FileHandler(Loggable):
@@ -37,9 +37,9 @@ class FileHandler(Loggable):
         self._target_path.delete_path()
         self._log_deleted()
 
-    def abort_target_path(self) -> None:
+    def abort_target_path(self, error: Exception) -> None:
         self._target_path.delete_path()
-        self._log_aborted()
+        self._log_aborted(error=error)
 
     def exists(self) -> bool:
         return self._target_path.exists()
@@ -61,6 +61,6 @@ class FileHandler(Loggable):
         return _MSG_DELETE_FILE.format(path=path)
 
     @Loggable.logfunction
-    def _log_aborted(self) -> str:
+    def _log_aborted(self, error: Exception) -> str:
         path = self._target_path.os_path
-        return _MSG_ABORT_FILE.format(path=path)
+        return _MSG_ABORT_FILE.format(path=path, error=error)
