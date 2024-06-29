@@ -4,10 +4,10 @@ import time
 from solutions.classes.trackable import Trackable
 from solutions.interface.console import ConsoleLogger
 
+_UPDATE_DELAY = 0.1
+
 
 class Animation(threading.Thread):
-
-    _UPDATE_DELAY = 0.1
 
     __slots__ = ("_base_msg", "_prefix", "_track_var", "_stop_event")
 
@@ -50,7 +50,7 @@ class Animation(threading.Thread):
     def run(self) -> None:
         self._log_msg()
         while not self._stop_event.is_set():
-            time.sleep(self._UPDATE_DELAY)
+            time.sleep(_UPDATE_DELAY)
             self._update()
 
     def stop(self) -> None:
