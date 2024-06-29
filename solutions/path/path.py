@@ -62,6 +62,9 @@ class Path:
     def dir_path(self) -> "Path":
         return Path(path_parts=self.dir_parts)
 
+    def join(self, *path_parts: str) -> "Path":
+        return Path(path_parts=self._path_parts + list(path_parts))
+
     def write(self, content: str, encoding: str = "utf-8") -> None:
         with open(file=self.os_path, mode="w", encoding=encoding) as file:
             file.write(content=content)
