@@ -38,3 +38,12 @@ class Path:
     @property
     def suffix(self) -> str:
         return self._path_parts[-1].split(".")[-1]
+
+    def delete_path(self) -> None:
+        os.remove(self.os_path)
+
+    def exists(self) -> bool:
+        return os.path.exists(self.os_path)
+
+    def is_dir(self) -> bool:
+        return os.path.isdir(self.os_path)
