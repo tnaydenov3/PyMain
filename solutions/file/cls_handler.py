@@ -5,9 +5,15 @@ _ERR_FILE_MISSING = "File {path} does not exist!"
 
 _MSG_DELETE_FILE = "{path} deleted."
 _MSG_ABORT_FILE = "File {path} aborted. (error: {error})"
+_MSG_WORK_BEGIN = "Beginning {action} on <{path}>..."
+_MSG_WORK_FINISHED = "Finished {action} on <{path}>."
 
 
 class FileHandler(Loggable):
+
+    @staticmethod
+    def _cl_action() -> str:
+        raise NotImplementedError
 
     @classmethod
     def _log_prefix(cls) -> str:
@@ -64,3 +70,13 @@ class FileHandler(Loggable):
     def _log_aborted(self, error: Exception) -> str:
         path = self._target_path.os_path
         return _MSG_ABORT_FILE.format(path=path, error=error)
+
+    @Loggable.logfunction
+    def _log_work_begin(self) -> str:
+        path = self._target_path.os_path
+        return _MSG_WORK_BEGIN.format(action=self._cl_action(), path=path)
+
+    @Loggable.logfunction
+    def _log_work_finished(self, action: str) -> str:
+        path = self._target_path.os_path
+        return _MSG_WORK_FINISHED.format(action=action, path=path)
