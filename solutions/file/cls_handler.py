@@ -1,7 +1,12 @@
+from solutions.classes.loggable import Loggable
 from solutions.path.path import Path
 
 
-class FileHandler:
+class FileHandler(Loggable):
+
+    @classmethod
+    def _log_prefix(cls) -> str:
+        return cls.__class__.__name__
 
     __slots__ = ("_target_path",)
 

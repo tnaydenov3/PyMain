@@ -4,7 +4,7 @@ from solutions.interface.console import ConsoleLogger
 
 class Loggable:
 
-    @staticmethod
+    @classmethod
     def _log_prefix() -> str:
         raise NotImplementedError
 
