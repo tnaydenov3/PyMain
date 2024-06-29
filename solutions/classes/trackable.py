@@ -1,4 +1,4 @@
-class AnimTrackable:
+class Trackable:
 
     __slots__ = ("_value", "_val_type")
 

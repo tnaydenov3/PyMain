@@ -1,7 +1,7 @@
 import threading
 import time
 
-from solutions.interface.anim_trackable import AnimTrackable
+from solutions.classes.trackable import Trackable
 from solutions.interface.console import ConsoleLogger
 
 
@@ -11,7 +11,7 @@ class Animation(threading.Thread):
 
     __slots__ = ("_base_msg", "_prefix", "_track_var", "_stop_event")
 
-    def __init__(self, *, base_msg: str, prefix: str, track_var: AnimTrackable) -> None:
+    def __init__(self, *, base_msg: str, prefix: str, track_var: Trackable) -> None:
         self._base_msg = base_msg
         self._prefix = prefix
         self._track_var = track_var
@@ -30,7 +30,7 @@ class Animation(threading.Thread):
         return self._prefix
 
     @property
-    def track_var(self) -> AnimTrackable:
+    def track_var(self) -> Trackable:
         return self._track_var
 
     @property
