@@ -8,7 +8,7 @@ class Animation(threading.Thread):
 
     _UPDATE_DELAY = 0.1
 
-    __slots__ = ("__weakref__", "_base_msg", "_prefix", "_track_var")
+    __slots__ = ("_base_msg", "_prefix", "_track_var")
 
     def __init__(self, *, base_msg: str, prefix: str, track_var: int) -> None:
         self._base_msg = base_msg
