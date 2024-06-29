@@ -54,9 +54,12 @@ class FileHandler(Loggable):
         self._target_path.delete_path()
         self._log_deleted()
 
-    def abort_target_path(self, error: Exception) -> None:
+    def _abort_target_path(self, error: Exception) -> None:
         self._target_path.delete_path()
         self._log_aborted(error=error)
+
+    def _handle_work(self) -> None:
+        raise NotImplementedError
 
     def _handle(self, force: bool = False) -> None:
         if not self.exists() and not force:
