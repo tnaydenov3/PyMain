@@ -14,7 +14,7 @@ _DL_ACTION = "Download"
 
 _ERR_DL_SIZE_EXCEEDED = f"Download size limit of {_MAX_DL_SIZE} bytes exceeded!"
 
-_ANIM_BASE_MESSAGE = 'Downloading "{url}" to file...[{dl_size}]'
+_ANIM_BASE_MESSAGE = 'Downloading "{url}" to file...[{{}}]'
 
 
 class FileDownloader(FileHandler):
