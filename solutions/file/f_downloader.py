@@ -60,7 +60,7 @@ class FileDownloader(FileHandler):
     def _handle_work(self) -> None:
         try:
             anim_object = Animation(
-                base_msg=_ANIM_BASE_MESSAGE,
+                base_msg=self._anim_base_smg(),
                 prefix=self._log_prefix(),
                 track_var=self._downlaoded_bytes,
                 formatting_lambda=ConsoleUtil.size_bytes_to_human_readable,
@@ -71,3 +71,6 @@ class FileDownloader(FileHandler):
 
         finally:
             anim_object.stop()
+
+    def _anim_base_smg(self) -> str:
+        return _ANIM_BASE_MESSAGE.format(url=self._source_url)
