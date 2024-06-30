@@ -1,4 +1,6 @@
+from contextlib import contextmanager
 import os
+from typing import Generator
 
 UNIX_SEP = "/"
 WINDOWS_SEP = "\\"
@@ -65,6 +67,13 @@ class Path:
 
     def join(self, *path_parts: str) -> "Path":
         return Path(path_parts=self._path_parts + list(path_parts))
+
+    @contextmanager
+    def open(
+        self, mode: str = "r", encoding: str = "utf-8"
+    ) -> Generator[None, None, None]:
+        with open(file=self.os_path, mode=mode, encoding=encoding) as file:
+            yield file
 
     def write(self, content: str, encoding: str = "utf-8") -> None:
         with open(file=self.os_path, mode="w", encoding=encoding) as file:
