@@ -23,7 +23,7 @@ class FileHandler(Loggable):
 
     __slots__ = ("_target_path",)
 
-    def __init__(self, target_path: Path) -> None:
+    def __init__(self, *, target_path: Path) -> None:
         self._target_path = target_path
 
     def __repr__(self) -> str:
