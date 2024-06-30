@@ -3,11 +3,10 @@ from solutions.classes.trackable import Trackable
 
 class TrackableInt(Trackable):
 
-    @staticmethod
-    def _check_constraints(*, value: int) -> bool:
-        return value >= 0
+    __slots__ = ("_max_value", "_min_value")
 
-    __slots__ = tuple()
+    def __init__(self, *, value: int, max_value: int, min_value: int = 0) -> None:
+        self._max_value = max_value
+        self._min_value = min_value
 
-    def __init__(self, *, value: int) -> None:
         super().__init__(value=value, val_type=int)
