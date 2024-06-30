@@ -1,19 +1,16 @@
-_ERR_VALTYPE_MSG = "Value must be of type {val_type}"
+_ERR_VALTYPE_MSG = "Value must be of type {val_type}."
 
 
 class Trackable:
 
-    @staticmethod
-    def _check_type(*, value: object, val_type: type) -> bool:
-        return isinstance(value, val_type)
-
     __slots__ = ("_value", "_val_type", "_err_value_msg")
 
-    def __init__(self, *, value: object, val_type: type, err_value_msg: str) -> None:
-        self._assert_value(value=value, val_type=val_type)
-        self._value = value
+    def __init__(self, *, val_type: type, value: object, err_value_msg: str) -> None:
         self._val_type = val_type
         self._err_value_msg = err_value_msg
+
+        self._assert_value(value=value)
+        self._value = value
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} ({self._value}: {self._val_type})>"
@@ -25,10 +22,6 @@ class Trackable:
     def value(self) -> object:
         return self._value
 
-    @property
-    def val_type(self) -> type:
-        return self._val_type
-
     @value.setter
     def value(self, value: object) -> None:
         self._assert_value(value=value, val_type=self._val_type)
@@ -37,9 +30,9 @@ class Trackable:
     def _check_constraints(self, *, value: object) -> bool:
         raise NotImplementedError
 
-    def _assert_value(self, *, value: object, val_type: type) -> None:
-        if not self._check_type(value=value, val_type=val_type):
-            raise TypeError(_ERR_VALTYPE_MSG.format(val_type=val_type))
+    def _assert_value(self, *, value: object) -> None:
+        if not isinstance(value, self._val_type):
+            raise TypeError(_ERR_VALTYPE_MSG.format(val_type=self._val_type))
 
         if not self._check_constraints(value=value):
             raise ValueError(self._err_value_msg)
