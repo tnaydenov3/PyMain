@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from io import TextIOWrapper
 import os
 from typing import Generator
 
@@ -71,7 +72,7 @@ class Path:
     @contextmanager
     def open(
         self, mode: str = "r", encoding: str = "utf-8"
-    ) -> Generator[None, None, None]:
+    ) -> Generator[TextIOWrapper, None, None]:
         with open(file=self.os_path, mode=mode, encoding=encoding) as file:
             yield file
 
