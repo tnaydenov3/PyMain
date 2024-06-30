@@ -15,7 +15,7 @@ class SizeBytesUtil:
                 break
             size_num /= FILE_SIZE_MULTIPLE
 
-        size_num = round(number=size_num, digits=_SIZE_NUM_ROUNDING_DECIMALS)
+        size_num = round(number=size_num, ndigits=_SIZE_NUM_ROUNDING_DECIMALS)
 
         return size_num, unit
 
