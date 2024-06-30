@@ -24,7 +24,7 @@ class Trackable:
 
     @value.setter
     def value(self, value: object) -> None:
-        self._assert_value(value=value, val_type=self._val_type)
+        self._assert_value(value=value)
         self._value = value
 
     def _check_constraints(self, *, value: object) -> bool:
