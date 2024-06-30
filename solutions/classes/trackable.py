@@ -13,9 +13,9 @@ class Trackable:
         raise NotImplementedError
 
     @classmethod
-    def _assert_value(cls, *, value: object) -> None:
-        if not cls._check_type(value=value, val_type=cls._val_type):
-            raise TypeError(_ERR_VALTYPE.format(val_type=cls._val_type))
+    def _assert_value(cls, *, value: object, val_type: type) -> None:
+        if not cls._check_type(value=value, val_type=val_type):
+            raise TypeError(_ERR_VALTYPE.format(val_type=val_type))
 
         if not cls._check_constraints(value=value):
             raise ValueError(_ERR_VALVALUE)
@@ -23,7 +23,7 @@ class Trackable:
     __slots__ = ("_value", "_val_type")
 
     def __init__(self, *, value: object, val_type: type) -> None:
-        self._check_type(value=value, val_type=val_type)
+        self._assert_value(value=value, val_type=val_type)
         self._value = value
         self._val_type = val_type
 
@@ -43,5 +43,5 @@ class Trackable:
 
     @value.setter
     def value(self, value: object) -> None:
-        self._check_type(value=value, val_type=self._val_type)
+        self._assert_value(value=value, val_type=self._val_type)
         self._value = value
