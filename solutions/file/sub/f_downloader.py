@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from urllib import request
 from solutions.classes.trackable_int import TrackableInt
 from solutions.path.path import Path
@@ -15,9 +16,12 @@ class SubDownloader:
         chunk_size: int = _DEFAULT_DL_CHUNK_SIZE,
     ) -> None:
         with request.urlopen(url=url) as response:
+            assert isinstance(response, HTTPResponse)
+
             with target_path.open(mode="wb") as target_file:
                 while True:
-                    chunk = response.read(chunk_size)
+
+                    chunk = response.read(amt=chunk_size)
                     if not chunk:
                         break
                     target_file.write(chunk)
