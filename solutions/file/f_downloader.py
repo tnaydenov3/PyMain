@@ -4,6 +4,8 @@ from solutions.interface.anim import Animation
 from solutions.interface.util import ConsoleUtil
 from solutions.path.path import Path
 
+_MAX_DL_SIZE = 10 * 1024 * 1024
+
 _DL_ACTION = "Download"
 
 _ANIM_BASE_MESSAGE = 'Downloading "{url}" to file...[{dl_size}]'
