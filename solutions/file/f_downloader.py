@@ -30,6 +30,9 @@ class FileDownloader(FileHandler):
     def downloaded_bytes(self) -> int:
         return self._downlaoded_bytes.value
 
+    def _download_file(self) -> None:
+        pass
+
     def _handle_work(self) -> None:
         try:
             anim_object = Animation(
