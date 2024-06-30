@@ -14,7 +14,9 @@ class SubDownloader:
         trackable: TrackableInt,
         chunk_size: int = _DEFAULT_DL_CHUNK_SIZE,
     ) -> None:
-        pass
+        with request.urlopen(url=url) as response:
+            with target_path.open("wb") as target_file:
+                pass
 
     __slots__ = tuple()
 
