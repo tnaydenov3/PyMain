@@ -55,13 +55,13 @@ class Path:
         return self._path_parts[-1].split(sep=".")[-1]
 
     def delete_path(self) -> None:
-        os.remove(path=self.os_path)
+        os.remove(self.os_path)
 
     def exists(self) -> bool:
-        return os.path.exists(path=self.os_path)
+        return os.path.exists(self.os_path)
 
     def is_dir(self) -> bool:
-        return os.path.isdir(s=self.os_path)
+        return os.path.isdir(self.os_path)
 
     def dir_path(self) -> "Path":
         return Path(path_parts=self.dir_parts)
