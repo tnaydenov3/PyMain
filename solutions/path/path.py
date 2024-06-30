@@ -35,12 +35,12 @@ class Path:
         return self._path_parts
 
     @property
-    def os_path(self) -> str:
-        return os.sep.join(self._path_parts)
+    def dir_parts(self) -> list[str]:
+        return self._path_parts[:-1]
 
     @property
-    def dir(self) -> "Path":
-        return Path(path_parts=self._path_parts[:-1])
+    def os_path(self) -> str:
+        return os.sep.join(self._path_parts)
 
     @property
     def os_dir(self) -> str:
