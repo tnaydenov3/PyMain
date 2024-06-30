@@ -43,6 +43,9 @@ class FileDownloader(FileHandler):
     def downloaded_bytes(self) -> int:
         return self._downlaoded_bytes.value
 
+    def download(self, force_dl: bool = False) -> None:
+        self._handle(force=force_dl)
+
     def _download_file(self) -> None:
         SubDownloader.downlaod_url_to_file(
             url=self._target_url,
