@@ -1,8 +1,11 @@
 from solutions.classes.trackable import Trackable
 from solutions.file.cls_handler import FileHandler
+from solutions.interface.anim import Animation
 from solutions.path.path import Path
 
 _DL_ACTION = "Download"
+
+_ANIM_BASE_MESSAGE = 'Downloading "{url}" to file...[{dl_size}]'
 
 
 class FileDownloader(FileHandler):
@@ -21,10 +24,18 @@ class FileDownloader(FileHandler):
     @property
     def target_url(self) -> str:
         return self._target_url
-    
+
     @property
     def downloaded_bytes(self) -> int:
         return self._downlaoded_bytes.value
 
     def _handle_work(self) -> None:
-        pass
+        try:
+            anim_object = Animation(
+                base_msg=_ANIM_BASE_MESSAGE,
+                prefix=self._log_prefix(),
+                track_var=self._downlaoded_bytes,
+            )
+
+        finally:
+            anim_object.stop()
