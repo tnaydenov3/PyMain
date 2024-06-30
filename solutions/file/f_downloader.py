@@ -1,6 +1,7 @@
 from solutions.classes.trackable import Trackable
 from solutions.file.cls_handler import FileHandler
 from solutions.interface.anim import Animation
+from solutions.interface.util import ConsoleUtil
 from solutions.path.path import Path
 
 _DL_ACTION = "Download"
@@ -35,6 +36,7 @@ class FileDownloader(FileHandler):
                 base_msg=_ANIM_BASE_MESSAGE,
                 prefix=self._log_prefix(),
                 track_var=self._downlaoded_bytes,
+                formatting_lambda=ConsoleUtil.size_bytes_to_human_readable,
             )
 
         finally:
