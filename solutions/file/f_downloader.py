@@ -7,6 +7,8 @@ from solutions.path.path import Path
 _MIN_DL_SIZE = 0
 _MAX_DL_SIZE = 10 * 1024 * 1024
 
+_DL_CHUNK_SIZE = 1024
+
 _DL_ACTION = "Download"
 
 _ERR_DL_SIZE_EXCEEDED = f"Download size limit of {_MAX_DL_SIZE} bytes exceeded!"
