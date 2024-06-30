@@ -62,7 +62,7 @@ class FileHandler(Loggable):
         raise NotImplementedError
 
     def _handle(self, force: bool = False) -> None:
-        if not self.exists() and not force:
+        if self.exists() and not force:
             self._log_skipping()
             return
 
