@@ -1,5 +1,6 @@
 from solutions.classes.trackable_int import TrackableInt
 from solutions.file.cls_handler import FileHandler
+from solutions.file.sub.f_downloader import SubDownloader
 from solutions.interface.anim import Animation
 from solutions.interface.util import ConsoleUtil
 from solutions.path.path import Path
@@ -43,7 +44,12 @@ class FileDownloader(FileHandler):
         return self._downlaoded_bytes.value
 
     def _download_file(self) -> None:
-        pass
+        SubDownloader.downlaod_url_to_file(
+            url=self._target_url,
+            target_path=self._target_path,
+            trackable=self._downlaoded_bytes,
+            chunk_size=_DL_CHUNK_SIZE,
+        )
 
     def _handle_work(self) -> None:
         try:
@@ -53,6 +59,9 @@ class FileDownloader(FileHandler):
                 track_var=self._downlaoded_bytes,
                 formatting_lambda=ConsoleUtil.size_bytes_to_human_readable,
             )
+
+            anim_object.start()
+            self._download_file()
 
         finally:
             anim_object.stop()
