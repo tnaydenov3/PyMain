@@ -26,8 +26,11 @@ class FileHandler(Loggable):
     def __init__(self, *, target_path: Path) -> None:
         self._target_path = target_path
 
+    def _repr_item() -> str:
+        raise NotImplementedError
+
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self._target_path})"
+        return f"{self.__class__.__name__}({self._repr_item()})"
 
     @property
     def target_path(self) -> Path:
