@@ -35,6 +35,9 @@ class FileDownloader(FileHandler):
             max_value=_MAX_DL_SIZE,
         )
 
+    def _repr_item(self) -> str:
+        return self._source_url
+
     @property
     def source_url(self) -> str:
         return self._source_url
