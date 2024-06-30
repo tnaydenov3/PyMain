@@ -23,11 +23,11 @@ class FileDownloader(FileHandler):
     def _cl_action(cls) -> str:
         return _DL_ACTION
 
-    __slots__ = ("_target_url",)
+    __slots__ = ("_source_url",)
 
-    def __init__(self, *, target_url: str, target_path: Path) -> None:
+    def __init__(self, *, source_url: str, target_path: Path) -> None:
         super().__init__(target_path=target_path)
-        self._target_url = target_url
+        self._source_url = source_url
         self._downlaoded_bytes = TrackableInt(
             value=0,
             err_value_msg=_ERR_DL_SIZE_EXCEEDED,
@@ -36,8 +36,8 @@ class FileDownloader(FileHandler):
         )
 
     @property
-    def target_url(self) -> str:
-        return self._target_url
+    def source_url(self) -> str:
+        return self._source_url
 
     @property
     def downloaded_bytes(self) -> int:
@@ -48,7 +48,7 @@ class FileDownloader(FileHandler):
 
     def _download_file(self) -> None:
         SubDownloader.downlaod_url_to_file(
-            url=self._target_url,
+            source_url=self._source_url,
             target_path=self._target_path,
             trackable=self._downlaoded_bytes,
             chunk_size=_DL_CHUNK_SIZE,

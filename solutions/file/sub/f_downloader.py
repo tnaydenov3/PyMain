@@ -10,12 +10,13 @@ class SubDownloader:
 
     @staticmethod
     def downlaod_url_to_file(
-        url: str,
+        *,
+        source_url: str,
         target_path: Path,
         trackable: TrackableInt,
         chunk_size: int = _DEFAULT_DL_CHUNK_SIZE,
     ) -> None:
-        with request.urlopen(url=url) as response:
+        with request.urlopen(url=source_url) as response:
             assert isinstance(response, HTTPResponse)
 
             with target_path.open(mode="wb") as target_file:
