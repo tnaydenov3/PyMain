@@ -1,5 +1,6 @@
 import threading
 import time
+from types import FunctionType
 
 from solutions.classes.trackable import Trackable
 from solutions.interface.console import ConsoleLogger
@@ -9,12 +10,26 @@ _UPDATE_DELAY = 0.1
 
 class Animation(threading.Thread):
 
-    __slots__ = ("_base_msg", "_prefix", "_track_var", "_stop_event")
+    __slots__ = (
+        "_base_msg",
+        "_prefix",
+        "_track_var",
+        "_formatting_lambda",
+        "_stop_event",
+    )
 
-    def __init__(self, *, base_msg: str, prefix: str, track_var: Trackable) -> None:
+    def __init__(
+        self,
+        *,
+        base_msg: str,
+        prefix: str,
+        track_var: Trackable,
+        formatting_lambda: FunctionType = lambda x: x,
+    ) -> None:
         self._base_msg = base_msg
         self._prefix = prefix
         self._track_var = track_var
+        self._formatting_lambda = formatting_lambda
         self._stop_event = threading.Event()
         super().__init__()
 
@@ -34,8 +49,13 @@ class Animation(threading.Thread):
         return self._track_var
 
     @property
+    def formatting_lambda(self) -> FunctionType:
+        return self._formatting_lambda
+
+    @property
     def msg(self) -> str:
-        return self._base_msg.format(self._track_var)
+        msg_value = self._formatting_lambda(self._track_var.value)
+        return self._base_msg.format(msg_value)
 
     def _log_msg(self) -> None:
         ConsoleLogger.log(message=self.msg, prefix=self.prefix)
