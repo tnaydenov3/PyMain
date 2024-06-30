@@ -73,7 +73,14 @@ class Path:
     def open(
         self, mode: str = "r", encoding: str = "utf-8"
     ) -> Generator[TextIOWrapper, None, None]:
-        with open(file=self.os_path, mode=mode, encoding=encoding) as file:
+        kwargs = {"file": self.os_path, "mode": mode, "encoding": encoding}
+        match mode:
+            case "rb" | "wb" | "ab":
+                kwargs.pop("encoding")
+            case _:
+                pass
+
+        with open(**kwargs) as file:
             yield file
 
     def write(self, content: str, encoding: str = "utf-8") -> None:
