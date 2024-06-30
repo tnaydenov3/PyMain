@@ -1,12 +1,15 @@
-from solutions.classes.trackable import Trackable
+from solutions.classes.trackable_int import TrackableInt
 from solutions.file.cls_handler import FileHandler
 from solutions.interface.anim import Animation
 from solutions.interface.util import ConsoleUtil
 from solutions.path.path import Path
 
+_MIN_DL_SIZE = 0
 _MAX_DL_SIZE = 10 * 1024 * 1024
 
 _DL_ACTION = "Download"
+
+_ERR_DL_SIZE_EXCEEDED = f"Download size limit of {_MAX_DL_SIZE} bytes exceeded!"
 
 _ANIM_BASE_MESSAGE = 'Downloading "{url}" to file...[{dl_size}]'
 
@@ -22,7 +25,12 @@ class FileDownloader(FileHandler):
     def __init__(self, *, target_url: str, target_path: Path) -> None:
         super().__init__(target_path=target_path)
         self._target_url = target_url
-        self._downlaoded_bytes = Trackable(value=0)
+        self._downlaoded_bytes = TrackableInt(
+            value=0,
+            err_value_msg=_ERR_DL_SIZE_EXCEEDED,
+            min_value=_MIN_DL_SIZE,
+            max_value=_MAX_DL_SIZE,
+        )
 
     @property
     def target_url(self) -> str:
