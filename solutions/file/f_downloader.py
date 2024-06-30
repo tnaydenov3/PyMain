@@ -23,7 +23,7 @@ class FileDownloader(FileHandler):
     def _cl_action(cls) -> str:
         return _DL_ACTION
 
-    __slots__ = ("_source_url",)
+    __slots__ = ("_source_url", "_downlaoded_bytes")
 
     def __init__(self, *, source_url: str, target_path: Path) -> None:
         super().__init__(target_path=target_path)
