@@ -1,12 +1,19 @@
 from urllib import request
-from solutions.classes.trackable import Trackable
+from solutions.classes.trackable_int import TrackableInt
 from solutions.path.path import Path
+
+_DEFAULT_DL_CHUNK_SIZE = 1024
 
 
 class SubDownloader:
 
     @staticmethod
-    def downlaod_url_to_file(url: str, target_path: Path, trackable: Trackable) -> None:
+    def downlaod_url_to_file(
+        url: str,
+        target_path: Path,
+        trackable: TrackableInt,
+        chunk_size: int = _DEFAULT_DL_CHUNK_SIZE,
+    ) -> None:
         pass
 
     __slots__ = tuple()
