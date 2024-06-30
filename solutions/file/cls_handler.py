@@ -57,9 +57,12 @@ class FileHandler(Loggable):
         self._target_path.delete_path()
         self._log_deleted()
 
-    def _abort_target_path(self, error: Exception) -> None:
+    def _abort_target_path(self, *, error: Exception, raise_error: bool = True) -> None:
         self._target_path.delete_path()
         self._log_aborted(error=error)
+
+        if raise_error:
+            raise error
 
     def _handle_work(self) -> None:
         raise NotImplementedError
@@ -74,8 +77,11 @@ class FileHandler(Loggable):
             self._handle_work()
             self._log_work_finished()
 
+        except IOError as error:
+            self._abort_target_path(error=error)
+
         except Exception as error:
-            self._log_aborted(error=error)
+            self._abort_target_path(error=error, raise_error=True)
 
     @Loggable.logfunction
     def _log_missing(self) -> str:
