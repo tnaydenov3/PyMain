@@ -10,7 +10,7 @@ class Loggable:
 
     @classmethod
     def _log_msg(cls, message: str) -> None:
-        ConsoleLogger.log(message=message, prefix=cls._log_prefix())
+        ConsoleLogger.log(message, prefix=cls._log_prefix())
 
     @classmethod
     def logfunction(cls, func: FunctionType) -> FunctionType:
