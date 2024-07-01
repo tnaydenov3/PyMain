@@ -1,4 +1,5 @@
 from solutions.interface.util import ConsoleUtil
+from solutions.testing.counter import TestsCounter
 from solutions.testing.testcase import TestCase
 
 _MSG_RESULT_VAL_PASSFAIL = "{result}"
@@ -36,6 +37,10 @@ class ConsoleTestingLoggerUtil:
         )
 
         return log_message
+    
+    @classmethod
+    def make_testpack_log_msg(cls, test_counter: TestsCounter) -> str:
+        pass
 
     __slots__ = tuple()
 
