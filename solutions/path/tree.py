@@ -1,8 +1,13 @@
 import os
 from solutions.path.path import Path
+from solutions.path.root import Root
 
 
 class Tree:
+
+    @classmethod
+    def _project_root(cls) -> Root:
+        raise NotImplementedError
 
     @staticmethod
     def _get_tree(root: Path) -> list[Path]:
