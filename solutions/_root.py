@@ -16,7 +16,7 @@ class Root(Singleton):
 
         return path
 
-    __slots__ = tuple()
+    __slots__ = ("_root",)
 
     def __init__(self) -> None:
         self._root = self._find_root()
