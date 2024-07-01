@@ -38,7 +38,7 @@ class Path:
         if isinstance(sub_parts, list):
             return self.__class__(path_parts=sub_parts)
         elif isinstance(sub_parts, str):
-            return Path(path_parts=[sub_parts])
+            return self.__class__(path_parts=[sub_parts])
 
     def __eq__(self, other: Union["Path", list[str]]) -> bool:
         if isinstance(other, Path):
