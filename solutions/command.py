@@ -32,7 +32,9 @@ class CommandCall:
         ConsoleLogger.log(log_msg, prefix=_LOG_PREFIX)
 
     @classmethod
-    def call(cls, command: str, /) -> None:
+    def call(cls, *args: str) -> None:
+        command = args[0]
+        
         if not command in cls._COMMANDS:
             cls._log_invalid_command(command=command)
 
