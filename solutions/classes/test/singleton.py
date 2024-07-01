@@ -3,7 +3,7 @@ from solutions.testing.runner import TestRunner
 from solutions.testing.testcase import PyMainTestCase
 
 
-def _init_test() -> None:
+def _init_test() -> tuple[type, ...]:
     class SingletonOne(Singleton):
 
         def __init__(self) -> None:
