@@ -17,7 +17,7 @@ _MSG_TOTAL_DEFAULT = (
 class ConsoleTestingLoggerUtil:
 
     @classmethod
-    def make_testcase_log_msg(cls, testcase: PyMainTestCase) -> str:
+    def make_testcase_log_msg(cls, *, testcase: PyMainTestCase) -> str:
         result_val = testcase.result
         error = testcase.error
         module = testcase.func_module
@@ -31,9 +31,7 @@ class ConsoleTestingLoggerUtil:
             case PyMainTestCase.PASS | PyMainTestCase.FAIL:
                 result = _MSG_RESULT_VAL_PASSFAIL.format(result=result_val)
             case PyMainTestCase.ERROR:
-                result = _MSG_RESULT_VAL_ERROR.format(
-                    result=result_val, error=error
-                )
+                result = _MSG_RESULT_VAL_ERROR.format(result=result_val, error=error)
             case _:
                 raise NotImplementedError
 
@@ -49,7 +47,7 @@ class ConsoleTestingLoggerUtil:
         return log_message
 
     @classmethod
-    def make_testpack_log_msg(cls, test_counter: TestResultCounter) -> str:
+    def make_testpack_log_msg(cls, *, test_counter: TestResultCounter) -> str:
         total = test_counter.total
         passed = test_counter.passed
         failed = test_counter.failed
