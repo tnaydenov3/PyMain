@@ -11,10 +11,15 @@ _T_INVALID_COMMAND = TextColors.temp_red(_MSG_INVALID_COMMAND)
 class Commands:
 
     TEST = "test"
+    TREE = "tree"
 
     @staticmethod
     def run_project_tests() -> None:
         PyMainTestRunner().run_tree(tree=PyMainTree.get_project_tree())
+
+    @staticmethod
+    def print_project_tree() -> None:
+        PyMainTree.get_project_tree().print_tree()
 
     __slots__ = tuple()
 
@@ -24,7 +29,10 @@ class Commands:
 
 class CommandCall:
 
-    _COMMANDS = {Commands.TEST: Commands.run_project_tests}
+    _COMMANDS = {
+        Commands.TEST: Commands.run_project_tests,
+        Commands.TREE: Commands.print_project_tree,
+    }
 
     @staticmethod
     def _log_invalid_command(*, command: str) -> None:
@@ -34,7 +42,7 @@ class CommandCall:
     @classmethod
     def call(cls, *args: str) -> None:
         command = args[0]
-        
+
         if not command in cls._COMMANDS:
             cls._log_invalid_command(command=command)
 
