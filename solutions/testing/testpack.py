@@ -22,6 +22,9 @@ class TestPack:
     def add_testcase(self, testcase: TestCase) -> None:
         self._testcases.append(testcase)
 
+    def all_passed(self) -> bool:
+        return self._passed == len(self._testcases) and not self._passed == 0
+
     def run(self) -> None:
         for testcase in self._testcases:
             testcase.run()
