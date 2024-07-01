@@ -18,13 +18,18 @@ class Tree:
     def _is_ignored(cls, path: Path) -> bool:
         return cls._project_ignore_manager().is_ignored(path=path)
 
-    @staticmethod
-    def _get_tree(root: Path) -> list[Path]:
+    @classmethod
+    def _get_tree(cls, root: Path) -> list[Path]:
         tree = []
         for dirpath_str, _, file_names in os.walk(top=root.os_path):
             dirpath = Path.from_string(path_str=dirpath_str)
+            
             for file in file_names:
-                tree.append(dirpath.join(file))
+                filepath = dirpath.join(file)
+                if cls._is_ignored(path=filepath):
+                    continue
+
+                tree.append(filepath)
         return tree
 
     @classmethod
