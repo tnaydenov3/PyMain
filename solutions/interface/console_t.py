@@ -7,7 +7,6 @@ MSG_PASS = TextColors.green(PyMainTestCase.PASS)
 MSG_FAIL = TextColors.red(PyMainTestCase.FAIL)
 MSG_ERROR = TextColors.red(PyMainTestCase.ERROR)
 
-_T_RESULT_PASSFAIL = "{result}"
 _T_RESULT_ERROR = f"{MSG_ERROR}: {{error}}"
 
 _T_TESTCASE_LOG = "{result} | {module} | {func_name} | {time}"
@@ -44,16 +43,18 @@ class ConsoleTestingLoggerUtil:
             error = error.__class__.__name__
 
         match result_val:
-            case PyMainTestCase.PASS | PyMainTestCase.FAIL:
-                result = _MSG_RESULT_VAL_PASSFAIL.format(result=result_val)
+            case PyMainTestCase.PASS:
+                result = MSG_PASS
+            case PyMainTestCase.FAIL:
+                result = MSG_FAIL
             case PyMainTestCase.ERROR:
-                result = _MSG_RESULT_VAL_ERROR.format(result=result_val, error=error)
+                result = _T_RESULT_ERROR.format(error=error)
             case _:
                 raise NotImplementedError
 
         time = ConsoleUtil.time_nanosecs_to_human_readable(time_ns=time_ns)
 
-        log_message = _MSG_TESTCASE.format(
+        log_message = _T_TESTCASE_LOG.format(
             result=result,
             module=module,
             func_name=func_name,
