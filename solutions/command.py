@@ -28,7 +28,7 @@ class CommandCall:
 
     @staticmethod
     def _log_invalid_command(*, command: str) -> None:
-        log_msg = _MSG_INVALID_COMMAND.format(command=command)
+        log_msg = _T_INVALID_COMMAND.format(command=command)
         ConsoleLogger.log(log_msg, prefix=_LOG_PREFIX)
 
     @classmethod
