@@ -30,3 +30,6 @@ class TestRunner(Singleton):
         self._test_pack = TestPack()
         file_path = Path.from_string(path_str=file)
         self._run_tests_from_path(file_path=file_path)
+
+    def run_global(self) -> None:
+        pass
