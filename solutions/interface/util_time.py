@@ -7,7 +7,7 @@ _TIME_NUM_ROUNDING_DECIMALS = 3
 class TimeNanosecondsUtil:
 
     @staticmethod
-    def format_nanoseconds(*, time_ns: int) -> tuple[float, str]:
+    def format_nanoseconds(time_ns: int) -> tuple[float, str]:
         time_num = time_ns
 
         for unit in TIME_UNITS_NS:
