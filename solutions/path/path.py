@@ -19,6 +19,18 @@ class Path:
 
         return norm_path
 
+    @classmethod
+    def from_string(cls, path_str: str) -> "Path":
+        normalized_path = cls._str_to_default_sep(path_str=path_str)
+        path_parts = normalized_path.split(sep=cls._DEFAULT_SEP)
+
+        return Path(path_parts=path_parts)
+
+    @classmethod
+    def from_path_w_diff_suffix(cls, *, path: "Path", suffix: str) -> "Path":
+        new_filename = f"{path.filename_nosuffix}.{suffix}"
+        return path.dir_path().join(new_filename)
+
     __slots__ = ("_path_parts",)
 
     def __init__(self, *, path_parts: list[str]) -> None:
@@ -130,15 +142,3 @@ class Path:
             return [Path(path_parts=self.path_parts + [path]) for path in subpaths]
         else:
             return []
-
-    @classmethod
-    def from_string(cls, path_str: str) -> "Path":
-        normalized_path = cls._str_to_default_sep(path_str=path_str)
-        path_parts = normalized_path.split(sep=cls._DEFAULT_SEP)
-
-        return Path(path_parts=path_parts)
-
-    @classmethod
-    def from_path_w_diff_suffix(cls, *, path: "Path", suffix: str) -> "Path":
-        new_filename = f"{path.filename_nosuffix}.{suffix}"
-        return path.dir_path().join(new_filename)
