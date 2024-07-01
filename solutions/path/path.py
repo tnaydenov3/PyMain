@@ -50,7 +50,9 @@ class Path:
         return f"<{self.__class__.__name__} ({self._path_parts})>"
 
     def __str__(self) -> str:
-        return self._DEFAULT_SEP.join(self._path_parts)
+        path = self._DEFAULT_SEP.join(self._path_parts)
+        path += self._DEFAULT_SEP if self.is_dir() else ""
+        return path
 
     def __len__(self) -> int:
         return len(self._path_parts)
