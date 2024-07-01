@@ -36,8 +36,9 @@ class CommandCall:
         if not command in cls._COMMANDS:
             cls._log_invalid_command(command=command)
 
-        func = cls._COMMANDS[command]
-        func()
+        else:
+            func = cls._COMMANDS[command]
+            func()
 
     __slots__ = tuple()
 
