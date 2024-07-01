@@ -24,6 +24,15 @@ class Tree:
         self._root = root
         self._tree = None
 
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__} ({self._root})>"
+
+    def __str__(self) -> str:
+        title = f"{self.__class__.__name__} (root: {self._root})"
+        tree_str = "\n".join([str(path) for path in self._tree])
+
+        return f"{title}\n{tree_str}"
+
     @property
     def root(self) -> Path:
         return self._root
