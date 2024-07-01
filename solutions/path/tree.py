@@ -1,7 +1,17 @@
+import os
 from solutions.path.path import Path
 
 
 class Tree:
+
+    @staticmethod
+    def _get_tree(root: Path) -> list[Path]:
+        tree = []
+        for dirpath_str, _, file_names in os.walk(top=root.os_path):
+            dirpath = Path.from_string(path_str=dirpath_str)
+            for file in file_names:
+                tree.append(dirpath.join(file))
+        return tree
 
     @classmethod
     def from_file_string(cls, path_str: str) -> "Tree":
