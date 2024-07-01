@@ -39,10 +39,8 @@ class Path:
         return self.__class__(path_parts=sub_parts_list)
 
     def __eq__(self, other: Union["Path", list[str]]) -> bool:
-        if isinstance(other, Path):
-            return self._path_parts == other.path_parts
-        elif isinstance(other, list):
-            return self._path_parts == other
+        other_obj = other.path_parts if isinstance(other, Path) else other
+        return self._path_parts == other_obj
 
     @property
     def path_parts(self) -> list[str]:
