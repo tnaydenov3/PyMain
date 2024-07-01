@@ -6,8 +6,8 @@ from solutions.testing.testcase import PyMainTestCase
 _T_RESULT_PASS = LogColors.color_text(PyMainTestCase.PASS, color=LogColors.GREEN)
 _T_RESULT_FAIL = LogColors.color_text(PyMainTestCase.FAIL, color=LogColors.RED)
 
-_MSG_RESULT_ERROR = "{result} ({error})"
-_T_RESULT_ERROR = LogColors.color_template(_MSG_RESULT_ERROR, result=LogColors.RED)
+_MSG_RESULT_ERROR = LogColors.color_text(PyMainTestCase.ERROR, color=LogColors.RED)
+_T_RESULT_ERROR = f"{_MSG_RESULT_ERROR}: {{error}}"
 
 
 _T_TESTCASE_LOG = "{result} | {module} | {func_name} | {time}"

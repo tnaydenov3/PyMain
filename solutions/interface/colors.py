@@ -57,9 +57,21 @@ class LogColors:
         return text
 
     @classmethod
-    def color_text(cls, *, text: str, color: str) -> str:
+    def color_text(cls, text: str, /, *, color: str) -> str:
         color_mod_str = cls._get_color_mod_str(color=color)
         return f"{color_mod_str}{text}{_COLOR_RESET}"
+
+    @classmethod
+    def color_red(cls, text: str) -> str:
+        return cls.color_text(text=text, color=cls.RED)
+
+    @classmethod
+    def color_green(cls, text: str) -> str:
+        return cls.color_text(text=text, color=cls.GREEN)
+
+    @classmethod
+    def color_yellow(cls, text: str) -> str:
+        return cls.color_text(text=text, color=cls.YELLOW)
 
     @classmethod
     def color_template(cls, template: str, /, *args, **kwargs) -> str:
