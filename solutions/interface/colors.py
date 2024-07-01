@@ -40,13 +40,16 @@ class TextColors:
         last_color = ""
         colored_text = ""
 
-        for char in text:
-            if char == "{":
+        for index, char in enumerate(text):
+
+            if char == "{" and not text[index - 1] == "{":
                 last_color = colors.pop(0) if colors else last_color
                 color_mod = cls._get_color_mod_str(color=last_color)
                 colored_text += f"{color_mod}{char}"
-            elif char == "}":
+
+            elif char == "}" and not text[index + 1] == "}":
                 colored_text += f"{char}{_COLOR_RESET}"
+
             else:
                 colored_text += char
 
