@@ -5,6 +5,10 @@ from solutions.path.path import Path
 class Root(Singleton):
     _SUBDIR_NEST = 2
 
+    @staticmethod
+    def _implemented() -> bool:
+        raise NotImplementedError
+
     @classmethod
     def _find_root(cls) -> Path:
         module = __import__(cls.__module__)
