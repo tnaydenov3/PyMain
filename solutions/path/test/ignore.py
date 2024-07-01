@@ -1,6 +1,6 @@
 from solutions.path.ignore import IgnoreManager
 from solutions.path.path import Path
-from solutions.project import PyMainTestRunner
+from solutions.project import PyMainIgnoreManager, PyMainTestRunner
 from solutions.testing.testcase import PyMainTestCase
 
 
@@ -29,7 +29,7 @@ def test_ignored() -> None:
     ignore_paths, _ = _init_test()
 
     for path in ignore_paths:
-        assert IgnoreManager().is_ignored(path=path)
+        assert PyMainIgnoreManager().is_ignored(path=path)
 
 
 @PyMainTestCase
@@ -37,7 +37,7 @@ def test_not_ignored() -> None:
     _, not_ignore_paths = _init_test()
 
     for path in not_ignore_paths:
-        assert not IgnoreManager().is_ignored(path=path)
+        assert not PyMainIgnoreManager().is_ignored(path=path)
 
 
 if __name__ == "__main__":
