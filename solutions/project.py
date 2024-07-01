@@ -1,7 +1,7 @@
 from solutions.path.ignore import IgnoreManager
 from solutions.path.tree import Tree
 from solutions.root import PyMainRoot
-from solutions.testing.manager import TestManager
+from solutions.testing.runner import TestRunner
 
 
 class PyMainIgnoreManager(IgnoreManager):
@@ -13,11 +13,11 @@ class PyMainIgnoreManager(IgnoreManager):
     __slots__ = tuple()
 
 
-class PyMainTestManager(TestManager):
+class PyMainTestRunner(TestRunner):
 
     @staticmethod
-    def _implemented() -> bool:
-        return True
+    def _project_root() -> PyMainRoot:
+        return PyMainRoot()
 
     __slots__ = tuple()
 

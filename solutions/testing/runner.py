@@ -9,10 +9,14 @@ from solutions.testing.testpack import PyMainTestPack
 
 class TestRunner(Singleton):
 
+    @staticmethod
+    def _project_root() -> Root:
+        raise NotImplementedError
+
     __slots__ = ("_root", "_test_pack")
 
     def __init__(self) -> None:
-        self._root: Root = None
+        self._root: Root = self._project_root()
         self._test_pack = PyMainTestPack()
 
     def _load_test_from_module(self, *, module: ModuleType) -> None:
