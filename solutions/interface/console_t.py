@@ -24,7 +24,7 @@ class ConsoleTestingLoggerUtil:
         func_name = testcase.func_name
         time_ns = testcase.time_ns
 
-        if not str(object=error):
+        if not str(error):
             error = error.__class__.__name__
 
         match result_val:
