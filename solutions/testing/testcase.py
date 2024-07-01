@@ -26,10 +26,6 @@ class PyMainTestCase:
         return self._func
 
     @property
-    def func_name(self) -> str:
-        return self._func.__name__
-
-    @property
     def func_module(self) -> str:
         return self._func.__module__
 
@@ -69,4 +65,5 @@ class PyMainTestCase:
             self._result = self.ERROR
             self._error = error
 
-        self._time_ns = end_time - start_time
+        finally:
+            self._time_ns = end_time - start_time
