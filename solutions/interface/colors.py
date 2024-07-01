@@ -8,12 +8,22 @@ _COLOR_MAGENTA = "\033[35m"
 _COLOR_CYAN = "\033[36m"
 _COLOR_WHITE = "\033[37m"
 
+_RED = "RED"
+_GREEN = "GREEN"
+_YELLOW = "YELLOW"
+
+_COLOR_DICT = {
+    _RED: _COLOR_RED,
+    _GREEN: _COLOR_GREEN,
+    _YELLOW: _COLOR_YELLOW,
+}
+
 
 class LogColors:
 
-    RED = _COLOR_RED
-    GREEN = _COLOR_GREEN
-    YELLOW = _COLOR_YELLOW
+    RED = _RED
+    GREEN = _GREEN
+    YELLOW = _YELLOW
 
     __slots__ = tuple()
 
