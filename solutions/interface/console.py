@@ -1,5 +1,6 @@
 import sys
 
+from solutions.interface.colors import LogColors
 from solutions.interface.console_t import ConsoleTestingLoggerUtil
 from solutions.testing.counter import TestResultCounter
 from solutions.testing.testcase import PyMainTestCase
@@ -19,7 +20,19 @@ class ConsoleLogger:
         sys.stdout.flush()
 
     @classmethod
-    def log(cls, message: str, *, prefix: str) -> None:
+    def log(
+        cls,
+        message: str,
+        *,
+        prefix: str,
+        color_msg: str = None,
+        color_prefix: str = None,
+    ) -> None:
+        if color_msg:
+            message = LogColors.color_text(text=message, color=color_msg)
+        if color_prefix:
+            prefix = LogColors.color_text(text=prefix, color=color_prefix)
+
         log_msg = cls._LOG_TEMP.format(prefix=prefix, message=message)
         cls._log_to_console(message=log_msg)
 
