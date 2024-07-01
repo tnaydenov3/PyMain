@@ -35,14 +35,17 @@ class LogColors:
         return f"{color_mod_str}{text}{_COLOR_RESET}"
 
     @classmethod
-    def color_placeholders(cls, text: str, **kwargs) -> str:
+    def color_placeholders_kwargs(cls, text: str, **kwargs) -> str:
         for placeholder_name, color in kwargs.items():
             placeholder = f"{{{placeholder_name}}}"
-            color_mod = cls._get_color_mod_str(color=color)
-            placeholder_colored = f"{color_mod}{placeholder}{_COLOR_RESET}"
+            placeholder_colored = cls.color_text(text=placeholder, color=color)
             text = text.replace(placeholder, placeholder_colored)
 
         return text
+
+    @classmethod
+    def color_placeholders_args(cls, text: str, *args) -> str:
+        pass
 
     __slots__ = tuple()
 
