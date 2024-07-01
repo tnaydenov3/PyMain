@@ -1,13 +1,22 @@
 import os
+from solutions.path.ignore import IgnoreManager
 from solutions.path.path import Path
 from solutions.path.root import Root
 
 
 class Tree:
 
-    @classmethod
-    def _project_root(cls) -> Root:
+    @staticmethod
+    def _project_root() -> Root:
         raise NotImplementedError
+
+    @staticmethod
+    def _project_ignore_manager() -> IgnoreManager:
+        raise NotImplementedError
+
+    @classmethod
+    def _is_ignored(cls, path: Path) -> bool:
+        return cls._project_ignore_manager().is_ignored(path=path)
 
     @staticmethod
     def _get_tree(root: Path) -> list[Path]:
