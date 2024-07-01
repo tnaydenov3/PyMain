@@ -50,7 +50,7 @@ class IgnoreManager(Singleton):
 
     def _load_ignore_patterns(self) -> list[Path]:
         patterns_list = []
-        patterns_list.append(Path([_GIT_PATTERN]))
+        patterns_list.append(Path.from_string(path_str=_GIT_PATTERN))
 
         with self._gitignore.open() as gi_file:
             for line in gi_file:
