@@ -85,10 +85,6 @@ class Path:
     def join(self, *path_parts: str) -> "Path":
         return Path(path_parts=self._path_parts + list(path_parts))
 
-    def new_with_suffix(self, suffix: str) -> "Path":
-        new_filename = f"{self.filename_nosuffix}.{suffix}"
-        return self.dir_path().join(new_filename)
-
     def relative(self, *, root: "Path") -> Union["Path", None]:
         if root == self[: len(root)]:
             return self[len(root) :]
@@ -132,4 +128,9 @@ class Path:
         normalized_path = cls._str_to_default_sep(path_str=path_str)
         path_parts = normalized_path.split(sep=cls._DEFAULT_SEP)
 
-        return cls(path_parts=path_parts)
+        return Path(path_parts=path_parts)
+
+    @classmethod
+    def from_path_w_diff_suffix(cls, *, path: "Path", suffix: str) -> "Path":
+        new_filename = f"{path.filename_nosuffix}.{suffix}"
+        return path.dir_path().join(new_filename)
