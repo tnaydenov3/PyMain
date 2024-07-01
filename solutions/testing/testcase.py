@@ -1,6 +1,8 @@
 import time
 from types import FunctionType
 
+from solutions.util.traceback import Tracebacks
+
 
 class PyMainTestCase:
 
@@ -53,7 +55,7 @@ class PyMainTestCase:
         except AssertionError as error:
             end_time = time.perf_counter_ns()
 
-            error_func = None
+            error_func = Tracebacks.get_error_funcname(error=error)
 
             if error_func == self._func.__name__:
                 self._result = self.FAIL
