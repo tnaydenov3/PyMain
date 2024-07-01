@@ -26,6 +26,10 @@ class PyMainTestCase:
         return self._func
 
     @property
+    def func_name(self) -> str:
+        return self._func.__name__
+
+    @property
     def func_module(self) -> str:
         return self._func.__module__
 
