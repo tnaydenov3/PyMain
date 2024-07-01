@@ -11,7 +11,7 @@ class Root(Singleton):
 
     @classmethod
     def _find_root(cls) -> Path:
-        module = __import__(cls.__module__)
+        module = __import__(name=cls.__module__)
         cls_file = module.__file__
 
         path = Path.from_string(path_str=cls_file)

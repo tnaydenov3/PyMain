@@ -17,11 +17,11 @@ class Tree:
         raise NotImplementedError
 
     @classmethod
-    def _is_ignored(cls, path: Path) -> bool:
+    def _is_ignored(cls, *, path: Path) -> bool:
         return cls._project_ignore_manager().is_ignored(path=path)
 
     @classmethod
-    def _get_tree(cls, root: Path) -> list[Path]:
+    def _get_tree(cls, *, root: Path) -> list[Path]:
         tree = []
         for dirpath_str, _, file_names in os.walk(top=root.os_path):
             dirpath = Path.from_string(path_str=dirpath_str)
@@ -44,13 +44,13 @@ class Tree:
         return cls(root=root)
 
     @classmethod
-    def from_file_string(cls, path_str: str) -> "Tree":
+    def from_file_string(cls, *, path_str: str) -> "Tree":
         root = Path.from_string(path_str=path_str)
         return cls(root=root)
 
     __slots__ = ("_root", "_tree")
 
-    def __init__(self, root: Path) -> None:
+    def __init__(self, *, root: Path) -> None:
         self._root = root
         self._tree = self._get_tree(root=root)
 
