@@ -11,7 +11,7 @@ _UTIL_CLEAR_PREV_LINE = "\033[F\033[K"
 
 class ConsoleLogger:
 
-    _LOG_TEMP = "[{prefix}] {message}"
+    _LOG_TEMPL = "[{prefix}] {message}"
 
     @staticmethod
     def _log_to_console(message: str, /, *, newline: bool = True) -> None:
@@ -34,7 +34,7 @@ class ConsoleLogger:
         if color_prefix:
             prefix = LogColors.color_text(text=prefix, color=color_prefix)
 
-        log_msg = cls._LOG_TEMP.format(prefix=prefix, message=message)
+        log_msg = cls._LOG_TEMPL.format(prefix=prefix, message=message)
         cls._log_to_console(message=log_msg)
 
     @classmethod
