@@ -19,16 +19,20 @@ class ConsoleTestingLoggerUtil:
     @classmethod
     def make_testcase_log_msg(cls, testcase: PyMainTestCase) -> str:
         result_val = testcase.result
+        error = testcase.error
         module = testcase.func_module
         func_name = testcase.func_name
         time_ns = testcase.time_ns
+
+        if not str(error):
+            error = error.__class__.__name__
 
         match result_val:
             case PyMainTestCase.PASS | PyMainTestCase.FAIL:
                 result = _MSG_RESULT_VAL_PASSFAIL.format(result=result_val)
             case PyMainTestCase.ERROR:
                 result = _MSG_RESULT_VAL_ERROR.format(
-                    result=result_val, error=testcase.error
+                    result=result_val, error=error
                 )
             case _:
                 raise NotImplementedError
