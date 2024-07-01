@@ -1,4 +1,5 @@
 from solutions.interface.util_file import SizeBytesUtil
+from solutions.interface.util_time import TimeNanosecondsUtil
 
 _FILE_SIZE_PATTERN = "{size_num} {unit}"
 
@@ -10,6 +11,12 @@ class ConsoleUtil:
         size_num, unit = SizeBytesUtil.format_bytes(size_bytes=size_bytes)
 
         return _FILE_SIZE_PATTERN.format(size_num=size_num, unit=unit)
+
+    @staticmethod
+    def time_nanosecs_to_human_readable(time_ns: int) -> str:
+        time_num, unit = TimeNanosecondsUtil.format_nanoseconds(time_ns=time_ns)
+
+        return _FILE_SIZE_PATTERN.format(size_num=time_num, unit=unit)
 
     __slots__ = tuple()
 
