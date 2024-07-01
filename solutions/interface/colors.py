@@ -25,6 +25,15 @@ class LogColors:
     GREEN = _GREEN
     YELLOW = _YELLOW
 
+    @staticmethod
+    def _get_color_mod_str(color: str) -> str:
+        return _COLOR_DICT.get(color, _COLOR_RESET)
+
+    @classmethod
+    def color_text(cls, *, text: str, color: str) -> str:
+        color_mod_str = cls._get_color_mod_str(color=color)
+        return f"{color_mod_str}{text}{_COLOR_RESET}"
+
     __slots__ = tuple()
 
     def __init__(self) -> None:
