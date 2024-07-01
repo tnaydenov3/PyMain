@@ -36,7 +36,7 @@ class Path:
     def __getitem__(self, index: int) -> "Path":
         sub_parts = self._path_parts[index]
         sub_parts_list = sub_parts if isinstance(sub_parts, list) else [sub_parts]
-        return self.__class__(path_parts=sub_parts_list)
+        return Path(path_parts=sub_parts_list)
 
     def __eq__(self, other: Union["Path", list[str]]) -> bool:
         other_obj = other.path_parts if isinstance(other, Path) else other
@@ -82,12 +82,13 @@ class Path:
         return Path(path_parts=self._path_parts + list(path_parts))
 
     def relative(self, *, root: "Path") -> Union["Path", None]:
-        if root == self.path_parts[: len(root)]:
-            return Path(path_parts=self.path_parts[len(root) :])
+        if root == self[: len(root)]:
+            return self[len(root) :]
 
     def module_form(self, *, root: "Path") -> str | None:
         if self.suffix == "py" and not self.is_dir():
-            pass
+            rel_path = self.relative(root=root)
+            return ".".join(rel_path.path_parts)
 
     @contextmanager
     def open(
