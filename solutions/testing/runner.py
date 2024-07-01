@@ -10,8 +10,8 @@ class TestRunner(Singleton):
 
     __slots__ = ("_root", "_test_pack")
 
-    def __init__(self, root: Root) -> None:
-        self._root = root.root
+    def __init__(self) -> None:
+        self._root: Root = None
         self._test_pack = TestPack()
 
     def _load_tests_from_path(self, *, file_path: Path) -> None:
