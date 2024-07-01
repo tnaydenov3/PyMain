@@ -36,29 +36,12 @@ class Animation(threading.Thread):
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} ({self._base_msg})>"
 
-    @property
-    def base_msg(self) -> str:
-        return self._base_msg
-
-    @property
-    def prefix(self) -> str:
-        return self._prefix
-
-    @property
-    def track_var(self) -> Trackable:
-        return self._track_var
-
-    @property
-    def formatting_lambda(self) -> FunctionType:
-        return self._formatting_lambda
-
-    @property
-    def msg(self) -> str:
+    def anim_message(self) -> str:
         msg_value = self._formatting_lambda(self._track_var.value)
         return self._base_msg.format(msg_value)
 
     def _log_msg(self) -> None:
-        ConsoleLogger.log(message=self.msg, prefix=self.prefix)
+        ConsoleLogger.log(message=self.anim_message(), prefix=self._prefix)
 
     def _log_update(self) -> None:
         ConsoleLogger.clear_last_line()
