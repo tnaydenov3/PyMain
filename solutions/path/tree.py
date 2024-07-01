@@ -71,3 +71,8 @@ class Tree:
 
     def get_modules(self) -> list[Path]:
         return [path for path in self._tree if path.is_module]
+
+    def get_module_forms(self) -> list[str]:
+        return [
+            path.module_form(root=self._root) for path in self._tree if path.is_module
+        ]
