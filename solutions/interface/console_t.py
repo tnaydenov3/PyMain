@@ -8,6 +8,12 @@ _MSG_RESULT_VAL_ERROR = "{result} ({error})"
 _MSG_TESTCASE = "{result} | {module} | {func_name} | {time}"
 
 
+_MSG_TOTAL_ALLPASS = "All tests PASSED {passed}/{total} | {time}"
+_MSG_TOTAL_DEFAULT = (
+    "Total: {total} | PASS {passed}, FAIL {failed}, ERROR {error} | {time}"
+)
+
+
 class ConsoleTestingLoggerUtil:
 
     @classmethod
@@ -37,7 +43,7 @@ class ConsoleTestingLoggerUtil:
         )
 
         return log_message
-    
+
     @classmethod
     def make_testpack_log_msg(cls, test_counter: TestsCounter) -> str:
         pass
