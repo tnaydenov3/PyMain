@@ -7,7 +7,7 @@ _SIZE_NUM_ROUNDING_DECIMALS = 2
 class SizeBytesUtil:
 
     @staticmethod
-    def format_bytes(size_bytes: int) -> tuple[float, str]:
+    def format_bytes(*, size_bytes: int) -> tuple[float, str]:
         size_num = size_bytes
 
         for unit in FILE_SIZE_UNITS:
