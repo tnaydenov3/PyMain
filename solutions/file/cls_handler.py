@@ -1,23 +1,23 @@
 from solutions.classes.loggable import Loggable
-from solutions.interface.colors import LogColors
+from solutions.interface.colors import TextColors
 from solutions.path.path import Path
 
 _ERR_F_MISSING = "File {path} does not exist!"
-_T_ERR_F_MISSING = LogColors._color_placeholders_kwargs(
+_T_ERR_F_MISSING = TextColors._color_placeholders_kwargs(
     text=_ERR_F_MISSING,
-    path=LogColors.RED,
+    path=TextColors._RED,
 )
 
 _MSG_ALRD_EXIST = "File {path} already exists, skipping."
-_T_MSG_ALRD_EXIST = LogColors._color_placeholders_kwargs(
+_T_MSG_ALRD_EXIST = TextColors._color_placeholders_kwargs(
     text=_MSG_ALRD_EXIST,
-    path=LogColors.YELLOW,
+    path=TextColors._YELLOW,
 )
 
 _MSG_DEL_FILE = "{path} deleted."
-_T_MSG_DEL_FILE = LogColors._color_placeholders_kwargs(
+_T_MSG_DEL_FILE = TextColors._color_placeholders_kwargs(
     text=_MSG_DEL_FILE,
-    path=LogColors.GREEN,
+    path=TextColors._GREEN,
 )
 
 

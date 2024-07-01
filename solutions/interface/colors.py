@@ -19,14 +19,14 @@ _COLOR_DICT = {
 }
 
 
-class LogColors:
+class TextColors:
 
-    RED = _RED
-    GREEN = _GREEN
-    YELLOW = _YELLOW
+    _RED = _RED
+    _GREEN = _GREEN
+    _YELLOW = _YELLOW
 
     @staticmethod
-    def _get_color_mod_str(color: str) -> str:
+    def _get_color_mod_str(*, color: str) -> str:
         return _COLOR_DICT.get(color, _COLOR_RESET)
 
     @classmethod
@@ -37,7 +37,7 @@ class LogColors:
 
         for char in text:
             if char == "{":
-                last_color = colors.pop(0) if colors else last_color
+                last_color = colors.pop(index=0) if colors else last_color
                 color_mod = cls._get_color_mod_str(color=last_color)
                 colored_text += f"{color_mod}{char}"
             elif char == "}":
@@ -48,33 +48,33 @@ class LogColors:
         return colored_text
 
     @classmethod
-    def _color_placeholders_kwargs(cls, text: str, **kwargs) -> str:
+    def _color_placeholders_kwargs(cls, *, text: str, **kwargs) -> str:
         for placeholder_name, color in kwargs.items():
             placeholder = f"{{{placeholder_name}}}"
-            placeholder_colored = cls.color_text(text=placeholder, color=color)
+            placeholder_colored = cls._color_text(text=placeholder, color=color)
             text = text.replace(placeholder, placeholder_colored)
 
         return text
 
     @classmethod
-    def color_text(cls, text: str, /, *, color: str) -> str:
+    def _color_text(cls, text: str, /, *, color: str) -> str:
         color_mod_str = cls._get_color_mod_str(color=color)
         return f"{color_mod_str}{text}{_COLOR_RESET}"
 
     @classmethod
-    def color_red(cls, text: str) -> str:
-        return cls.color_text(text=text, color=cls.RED)
+    def red(cls, text: str, /) -> str:
+        return cls._color_text(text, color=cls._RED)
 
     @classmethod
-    def color_green(cls, text: str) -> str:
-        return cls.color_text(text=text, color=cls.GREEN)
+    def green(cls, text: str, /) -> str:
+        return cls._color_text(text, color=cls._GREEN)
 
     @classmethod
-    def color_yellow(cls, text: str) -> str:
-        return cls.color_text(text=text, color=cls.YELLOW)
+    def yellow(cls, text: str, /) -> str:
+        return cls._color_text(text, color=cls._YELLOW)
 
     @classmethod
-    def color_template(cls, template: str, /, *args, **kwargs) -> str:
+    def col_templ(cls, template: str, /, *args, **kwargs) -> str:
         if args:
             template = cls._color_placeholders_args(template, *args)
         if kwargs:

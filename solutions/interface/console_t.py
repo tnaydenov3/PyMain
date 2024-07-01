@@ -1,12 +1,12 @@
-from solutions.interface.colors import LogColors
+from solutions.interface.colors import TextColors
 from solutions.interface.util import ConsoleUtil
 from solutions.testing.counter import TestResultCounter
 from solutions.testing.testcase import PyMainTestCase
 
-_T_RESULT_PASS = LogColors.color_text(PyMainTestCase.PASS, color=LogColors.GREEN)
-_T_RESULT_FAIL = LogColors.color_text(PyMainTestCase.FAIL, color=LogColors.RED)
+_T_RESULT_PASS = TextColors._color_text(PyMainTestCase.PASS, color=TextColors._GREEN)
+_T_RESULT_FAIL = TextColors._color_text(PyMainTestCase.FAIL, color=TextColors._RED)
 
-_MSG_RESULT_ERROR = LogColors.color_text(PyMainTestCase.ERROR, color=LogColors.RED)
+_MSG_RESULT_ERROR = TextColors._color_text(PyMainTestCase.ERROR, color=TextColors._RED)
 _T_RESULT_ERROR = f"{_MSG_RESULT_ERROR}: {{error}}"
 
 
