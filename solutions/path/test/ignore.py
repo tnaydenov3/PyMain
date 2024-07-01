@@ -25,11 +25,16 @@ def _init_test() -> tuple[list[Path], ...]:
 
 
 @PyMainTestCase
-def test_ignore() -> None:
-    ignore_paths, not_ignore_paths = _init_test()
+def test_ignored() -> None:
+    ignore_paths, _ = _init_test()
 
     for path in ignore_paths:
         assert IgnoreManager().is_ignored(path=path)
+
+
+@PyMainTestCase
+def test_not_ignored() -> None:
+    _, not_ignore_paths = _init_test()
 
     for path in not_ignore_paths:
         assert not IgnoreManager().is_ignored(path=path)
