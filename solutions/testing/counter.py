@@ -3,7 +3,7 @@ from solutions.testing.testcase import TestCase
 
 class TestsCounter:
 
-    __slots__ = ("_passed", "_failed", "_error", "_total")
+    __slots__ = ("_passed", "_failed", "_error", "_total", "_time_ns")
 
     def __init__(self) -> None:
         self._passed = 0
