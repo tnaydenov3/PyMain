@@ -63,6 +63,10 @@ class Path:
         return self._path_parts[-1]
 
     @property
+    def filename_nosuffix(self) -> str:
+        return self._path_parts[-1].rsplit(sep=".", maxsplit=1)[0]
+
+    @property
     def suffix(self) -> str:
         return self._path_parts[-1].split(sep=".")[-1]
 
@@ -81,6 +85,10 @@ class Path:
     def join(self, *path_parts: str) -> "Path":
         return Path(path_parts=self._path_parts + list(path_parts))
 
+    def new_with_suffix(self, suffix: str) -> "Path":
+        new_filename = f"{self.filename_nosuffix}.{suffix}"
+        return self.dir_path().join(new_filename)
+
     def relative(self, *, root: "Path") -> Union["Path", None]:
         if root == self[: len(root)]:
             return self[len(root) :]
@@ -88,7 +96,7 @@ class Path:
     def module_form(self, *, root: "Path") -> str | None:
         if self.suffix == "py" and not self.is_dir():
             rel_path = self.relative(root=root)
-            return ".".join(rel_path.path_parts)
+            return f'{".".join(rel_path.path_parts[-1:])}.{rel_path.filename}'
 
     @contextmanager
     def open(
