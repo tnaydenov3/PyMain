@@ -10,3 +10,6 @@ class TestRunner(Singleton):
 
     def __init__(self, root: Root) -> None:
         self._root = root.root
+
+    def _load_local_tests(self, file_path: Path) -> TestPack:
+        pass
