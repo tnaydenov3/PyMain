@@ -12,6 +12,9 @@ class IgnoreManager(Singleton):
     @staticmethod
     def _match_pattern(path: Path, pattern: Path) -> bool:
         window_size = len(pattern)
+        for i in range(len(path) - window_size + 1):
+            if path[i : i + window_size] == pattern:
+                return True
 
     @staticmethod
     def _project_root() -> Root:
