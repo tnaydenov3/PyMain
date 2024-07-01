@@ -4,7 +4,7 @@ from types import FrameType
 class Tracebacks:
 
     @staticmethod
-    def _get_error_frame(error: Exception) -> FrameType:
+    def _get_error_frame(*, error: Exception) -> FrameType:
         traceback = error.__traceback__
 
         while traceback.tb_next:
@@ -13,11 +13,11 @@ class Tracebacks:
         return traceback.tb_frame
 
     @classmethod
-    def get_error_frame(cls, error: Exception) -> FrameType:
+    def get_error_frame(cls, *, error: Exception) -> FrameType:
         return cls._get_error_frame(error=error)
 
     @classmethod
-    def get_error_funcname(cls, error: Exception) -> str:
+    def get_error_funcname(cls, *, error: Exception) -> str:
         return cls._get_error_frame(error=error).f_code.co_name
 
     __slots__ = tuple()
