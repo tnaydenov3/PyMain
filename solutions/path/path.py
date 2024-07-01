@@ -35,10 +35,8 @@ class Path:
 
     def __getitem__(self, index: int) -> "Path":
         sub_parts = self._path_parts[index]
-        if isinstance(sub_parts, list):
-            return self.__class__(path_parts=sub_parts)
-        elif isinstance(sub_parts, str):
-            return self.__class__(path_parts=[sub_parts])
+        sub_parts_list = sub_parts if isinstance(sub_parts, list) else [sub_parts]
+        return self.__class__(path_parts=sub_parts_list)
 
     def __eq__(self, other: Union["Path", list[str]]) -> bool:
         if isinstance(other, Path):
