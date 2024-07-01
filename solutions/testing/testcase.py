@@ -13,6 +13,7 @@ class TestCase:
         self._func = func
         self._result = None
         self._time = None
+        self._error = None
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} ({self.func.__name__})>"
@@ -36,3 +37,7 @@ class TestCase:
     @property
     def time(self) -> float:
         return self._time
+
+    @property
+    def error(self) -> Exception | None:
+        return self._error
