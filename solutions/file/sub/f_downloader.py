@@ -3,8 +3,6 @@ from urllib import request
 from solutions.classes.trackable_int import TrackableInt
 from solutions.path.path import Path
 
-_DEFAULT_DL_CHUNK_SIZE = 1024
-
 
 class SubDownloader:
 
@@ -14,7 +12,7 @@ class SubDownloader:
         source_url: str,
         target_path: Path,
         trackable: TrackableInt,
-        chunk_size: int = _DEFAULT_DL_CHUNK_SIZE,
+        chunk_size: int,
     ) -> None:
         with request.urlopen(url=source_url) as response:
             assert isinstance(response, HTTPResponse)
