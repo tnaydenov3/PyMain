@@ -29,10 +29,8 @@ class ConsoleLogger:
         cls._log_to_console(message=log_msg)
 
     @classmethod
-    def log_testpack_result(cls, test_counter: TestsCounter) -> None:
-        log_msg = ConsoleTestingLoggerUtil.make_testpack_log_msg(
-            test_counter=test_counter
-        )
+    def log_testpack_result(cls, counter: TestsCounter) -> None:
+        log_msg = ConsoleTestingLoggerUtil.make_testpack_log_msg(test_counter=counter)
         cls._log_to_console(message=log_msg)
 
     @classmethod
