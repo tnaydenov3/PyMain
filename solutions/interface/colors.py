@@ -30,21 +30,7 @@ class LogColors:
         return _COLOR_DICT.get(color, _COLOR_RESET)
 
     @classmethod
-    def color_text(cls, *, text: str, color: str) -> str:
-        color_mod_str = cls._get_color_mod_str(color=color)
-        return f"{color_mod_str}{text}{_COLOR_RESET}"
-
-    @classmethod
-    def color_placeholders(cls, text: str, **kwargs) -> str:
-        for placeholder_name, color in kwargs.items():
-            placeholder = f"{{{placeholder_name}}}"
-            placeholder_colored = cls.color_text(text=placeholder, color=color)
-            text = text.replace(placeholder, placeholder_colored)
-
-        return text
-
-    @classmethod
-    def color_placeholders_args(cls, text: str, *args: str) -> str:
+    def _color_placeholders_args(cls, text: str, *args: str) -> str:
         colors = list(args)
         last_color = ""
         colored_text = ""
@@ -60,6 +46,29 @@ class LogColors:
                 colored_text += char
 
         return colored_text
+
+    @classmethod
+    def _color_placeholders_kwargs(cls, text: str, **kwargs) -> str:
+        for placeholder_name, color in kwargs.items():
+            placeholder = f"{{{placeholder_name}}}"
+            placeholder_colored = cls.color_text(text=placeholder, color=color)
+            text = text.replace(placeholder, placeholder_colored)
+
+        return text
+
+    @classmethod
+    def color_text(cls, *, text: str, color: str) -> str:
+        color_mod_str = cls._get_color_mod_str(color=color)
+        return f"{color_mod_str}{text}{_COLOR_RESET}"
+
+    @classmethod
+    def color_template(cls, template: str, /, *args, **kwargs) -> str:
+        if kwargs:
+            template = cls._color_placeholders_kwargs(text=template, **kwargs)
+        if args:
+            template = cls._color_placeholders_args(text=template, *args)
+
+        return template
 
     __slots__ = tuple()
 
