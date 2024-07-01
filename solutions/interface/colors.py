@@ -42,7 +42,7 @@ class TextColors:
 
         for char in text:
             if char == "{":
-                last_color = colors.pop(index=0) if colors else last_color
+                last_color = colors.pop(0) if colors else last_color
                 color_mod = cls._get_color_mod_str(color=last_color)
                 colored_text += f"{color_mod}{char}"
             elif char == "}":
