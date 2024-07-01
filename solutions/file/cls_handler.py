@@ -47,14 +47,14 @@ class FileHandler(Loggable):
         return self._target_path
 
     @property
-    def os_path(self) -> str:
+    def target_path_os_str(self) -> str:
         return self._target_path.os_path
 
     @property
-    def path(self) -> str:
+    def target_path_str(self) -> str:
         return str(object=self._target_path)
 
-    def exists(self) -> bool:
+    def target_exists(self) -> bool:
         return self._target_path.exists()
 
     def target_filename(self) -> str:
@@ -78,7 +78,7 @@ class FileHandler(Loggable):
         raise NotImplementedError
 
     def _handle(self, force: bool = False) -> None:
-        if self.exists() and not force:
+        if self.target_exists() and not force:
             self._log_skipping()
             return
 
@@ -111,16 +111,16 @@ class FileHandler(Loggable):
     @Loggable.logfunction
     def _log_aborted(self, error: Exception) -> str:
         path = self._target_path.os_path
-        return _MSG_ABORT_FILE.format(path=path, error=error)
+        return _T_MSG_ABORT_FILE.format(path=path, error=error)
 
     @Loggable.logfunction
     def _log_work_begin(self) -> str:
         action = self._cl_action()
         main_attr = self._main_attr()
-        return _MSG_WORK_BEGIN.format(action=action, main_attr=main_attr)
+        return _T_MSG_WORK_BEGIN.format(action=action, main_attr=main_attr)
 
     @Loggable.logfunction
     def _log_work_finished(self) -> str:
         action = self._cl_action()
         main_attr = self._main_attr()
-        return _MSG_WORK_FINISHED.format(action=action, main_attr=main_attr)
+        return _T_MSG_WORK_FINISHED.format(action=action, main_attr=main_attr)
