@@ -10,6 +10,10 @@ _ERR_FILE_NOT_FOUND = f'"{_GITIGNORE_FILE}" file not found.'
 class IgnoreManager(Singleton):
 
     @staticmethod
+    def _match_pattern(path: Path, pattern: Path) -> bool:
+        window_size = len(pattern)
+
+    @staticmethod
     def _project_root() -> Root:
         raise NotImplementedError
 
