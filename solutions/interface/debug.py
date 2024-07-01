@@ -1,8 +1,10 @@
 from typing import Any
 
+from solutions.interface.colors import TextColors
 from solutions.interface.console import ConsoleLogger
 
-_DEBUG_PREF = "DEBUG"
+_MSG_DEBUG_PREF = "DEBUG"
+_DEBUG_PREF = TextColors.yellow(_MSG_DEBUG_PREF)
 
 
 class Debug:
