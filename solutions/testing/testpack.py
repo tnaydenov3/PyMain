@@ -31,7 +31,7 @@ class PyMainTestPack:
     def run(self) -> None:
         for testcase in self._testcases:
             testcase.run()
-            self._counter.increment_counter(result=testcase.result)
+            self._counter.increment_counter(testcase=testcase)
             ConsoleLogger.log_test_result(testcase=testcase)
 
         ConsoleLogger.log_testpack_result(counter=self._counter)
