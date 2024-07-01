@@ -18,10 +18,3 @@ class TestManager(Singleton):
         TestRunner()._root = project_root.root
 
 
-class PyMainTestManager(TestManager):
-
-    @staticmethod
-    def _implemented() -> bool:
-        return True
-
-    __slots__ = tuple()
