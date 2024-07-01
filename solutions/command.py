@@ -5,6 +5,8 @@ from solutions.testing.runner import TestRunner
 
 class Commands:
 
+    TEST = "test"
+
     @staticmethod
     def run_project_tests() -> None:
         TestRunner().run_tree(tree=PyMainTree.get_project_tree())
@@ -17,9 +19,7 @@ class Commands:
 
 class CommandCall:
 
-    TEST = "test"
-
-    _COMMANDS = {TEST: Commands.run_project_tests}
+    _COMMANDS = {Commands.TEST: Commands.run_project_tests}
 
     def __call__(self, command: str, /) -> None:
         func = self._COMMANDS[command]
