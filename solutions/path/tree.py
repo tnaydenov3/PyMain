@@ -6,6 +6,8 @@ from solutions.path.root import Root
 
 class Tree:
 
+    _INDENT = " " * 4
+
     @staticmethod
     def _project_root() -> Root:
         raise NotImplementedError
@@ -80,8 +82,22 @@ class Tree:
     def _get_modules_str(self) -> str:
         return "\n".join([mod_form for mod_form in self.get_module_forms()])
 
+    def _get_tree_str(self) -> str:
+        root = self._root
+        rel_branches = []
+
+        for path in self._tree[1:]:
+            indent = len(path) - len(root)
+            branch = f"{self._INDENT * indent}{path._DEFAULT_SEP}{path.filename}"
+            rel_branches.append(branch)
+
+        return f'{root}\n{"\n".join(rel_branches)}'
+
     def print_tree_paths(self) -> None:
         print(self)
 
     def print_modules(self) -> None:
         print(self._get_modules_str())
+
+    def print_tree(self) -> None:
+        print(self._get_tree_str())
