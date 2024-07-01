@@ -21,7 +21,7 @@ class Path:
         norm_path = norm_path.replace(UNIX_SEP, cls._DEFAULT_SEP)
         norm_path = norm_path.replace(WINDOWS_SEP, cls._DEFAULT_SEP)
 
-        return norm_path
+        return norm_path.strip(cls._DEFAULT_SEP)
 
     @classmethod
     def _normalize_path(cls, path: str) -> str:
