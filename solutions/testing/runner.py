@@ -16,7 +16,7 @@ class TestRunner(Singleton):
 
     def _load_tests_from_path(self, *, file_path: Path) -> None:
         module_name = file_path.module_form(root=self._root)
-        module: ModuleType = __import__(module_name)
+        module: ModuleType = __import__(name=module_name, fromlist=[module_name])
 
         for obj in module.__dict__.values():
             if isinstance(obj, PyMainTestCase):
