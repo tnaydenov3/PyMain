@@ -10,7 +10,12 @@ _ERR_FILE_NOT_FOUND = f'"{_GITIGNORE_FILE}" file not found.'
 class IgnoreManager(Singleton):
 
     @staticmethod
-    def _find_gitignore(root: Root) -> Path:
+    def _project_root() -> Root:
+        raise NotImplementedError
+
+    @classmethod
+    def _find_gitignore(cls) -> Path:
+        root = cls._project_root()
         path = root.root
 
         while not path == path.dir_path():
@@ -24,4 +29,5 @@ class IgnoreManager(Singleton):
     __slots__ = ("_ignore_list",)
 
     def __init__(self) -> None:
+        self._gitignore = self._find_gitignore()
         self._ignore_list = []
