@@ -5,19 +5,19 @@ from solutions.path.path import Path
 _ERR_F_MISSING = "File {path} does not exist!"
 _T_ERR_F_MISSING = TextColors._color_placeholders_kwargs(
     text=_ERR_F_MISSING,
-    path=TextColors._RED,
+    path=TextColors.RED,
 )
 
 _MSG_ALRD_EXIST = "File {path} already exists, skipping."
 _T_MSG_ALRD_EXIST = TextColors._color_placeholders_kwargs(
     text=_MSG_ALRD_EXIST,
-    path=TextColors._YELLOW,
+    path=TextColors.YELLOW,
 )
 
 _MSG_DEL_FILE = "{path} deleted."
 _T_MSG_DEL_FILE = TextColors._color_placeholders_kwargs(
     text=_MSG_DEL_FILE,
-    path=TextColors._GREEN,
+    path=TextColors.GREEN,
 )
 
 

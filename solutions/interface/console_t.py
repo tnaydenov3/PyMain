@@ -3,19 +3,30 @@ from solutions.interface.util import ConsoleUtil
 from solutions.testing.counter import TestResultCounter
 from solutions.testing.testcase import PyMainTestCase
 
-_T_RESULT_PASS = TextColors._color_text(PyMainTestCase.PASS, color=TextColors._GREEN)
-_T_RESULT_FAIL = TextColors._color_text(PyMainTestCase.FAIL, color=TextColors._RED)
+MSG_PASS = TextColors.green(PyMainTestCase.PASS)
+MSG_FAIL = TextColors.red(PyMainTestCase.FAIL)
+MSG_ERROR = TextColors.red(PyMainTestCase.ERROR)
 
-_MSG_RESULT_ERROR = TextColors._color_text(PyMainTestCase.ERROR, color=TextColors._RED)
-_T_RESULT_ERROR = f"{_MSG_RESULT_ERROR}: {{error}}"
-
+_T_RESULT_PASSFAIL = "{result}"
+_T_RESULT_ERROR = f"{MSG_ERROR}: {{error}}"
 
 _T_TESTCASE_LOG = "{result} | {module} | {func_name} | {time}"
 
-
 _MSG_TOTAL_ALLPASS = "All tests PASSED {passed}/{total} | {time}"
+_T_TOTAL_ALLPASS = TextColors.col_templ(
+    _MSG_TOTAL_ALLPASS,
+    passed=TextColors.GREEN,
+    total=TextColors.GREEN,
+)
+
 _MSG_TOTAL_DEFAULT = (
     "Total: {total} | PASS {passed}, FAIL {failed}, ERROR {error} | {time}"
+)
+_T_TOTAL_DEFAULT = TextColors.col_templ(
+    _MSG_TOTAL_DEFAULT,
+    passed=TextColors.GREEN,
+    failed=TextColors.RED,
+    error=TextColors.RED,
 )
 
 

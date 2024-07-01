@@ -21,9 +21,9 @@ _COLOR_DICT = {
 
 class TextColors:
 
-    _RED = _RED
-    _GREEN = _GREEN
-    _YELLOW = _YELLOW
+    RED = _RED
+    GREEN = _GREEN
+    YELLOW = _YELLOW
 
     @staticmethod
     def _get_color_mod_str(*, color: str) -> str:
@@ -63,15 +63,15 @@ class TextColors:
 
     @classmethod
     def red(cls, text: str, /) -> str:
-        return cls._color_text(text, color=cls._RED)
+        return cls._color_text(text, color=cls.RED)
 
     @classmethod
     def green(cls, text: str, /) -> str:
-        return cls._color_text(text, color=cls._GREEN)
+        return cls._color_text(text, color=cls.GREEN)
 
     @classmethod
     def yellow(cls, text: str, /) -> str:
-        return cls._color_text(text, color=cls._YELLOW)
+        return cls._color_text(text, color=cls.YELLOW)
 
     @classmethod
     def col_templ(cls, template: str, /, *args, **kwargs) -> str:
