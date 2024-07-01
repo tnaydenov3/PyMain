@@ -1,4 +1,4 @@
-from solutions.classes.singleton import Singleton, SingletonMeta
+from solutions.classes.singleton import Singleton
 from solutions.path.path import Path
 
 
@@ -23,6 +23,7 @@ class Root(Singleton):
     __slots__ = ("_root",)
 
     def __init__(self) -> None:
+        assert self._implemented()
         self._root = self._find_root()
 
     @property
