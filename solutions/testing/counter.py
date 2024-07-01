@@ -38,7 +38,7 @@ class TestResultCounter:
     def all_passed(self) -> bool:
         return self._passed == self._total
 
-    def increment_counter(self, testcase: PyMainTestCase) -> None:
+    def increment_counter(self, *, testcase: PyMainTestCase) -> None:
         self._total += 1
 
         match testcase.result:
