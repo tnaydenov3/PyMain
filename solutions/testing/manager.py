@@ -15,7 +15,7 @@ class TestManager(Singleton):
 
     def __init__(self, *, project_root=_PYMAIN_ROOT) -> None:
         assert self._implemented()
-        TestRunner()._root = project_root
+        TestRunner()._root = project_root.root
 
 
 class PyMainTestManager(TestManager):
