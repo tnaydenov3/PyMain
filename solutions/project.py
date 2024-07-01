@@ -1,4 +1,5 @@
 from solutions.path.ignore import IgnoreManager
+from solutions.path.tree import Tree
 from solutions.root import PyMainRoot
 from solutions.testing.manager import TestManager
 
@@ -21,7 +22,7 @@ class PyMainTestManager(TestManager):
     __slots__ = tuple()
 
 
-class PyMainTree:
+class PyMainTree(Tree):
 
     @staticmethod
     def _project_root() -> PyMainRoot:
