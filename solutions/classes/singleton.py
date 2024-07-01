@@ -4,9 +4,9 @@ class SingletonMeta(type):
 
     __slots__ = tuple()
 
-    def __call__(cls, *, kwargs) -> "SingletonMeta":
+    def __call__(cls, *args, **kwargs) -> "SingletonMeta":
         if not cls in cls._instances:
-            cls._instances[cls] = super().__call__(**kwargs)
+            cls._instances[cls] = super().__call__(*args, **kwargs)
 
         return cls._instances[cls]
 
