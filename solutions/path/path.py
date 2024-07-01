@@ -70,6 +70,10 @@ class Path:
     def suffix(self) -> str:
         return self._path_parts[-1].split(sep=".")[-1]
 
+    @property
+    def is_module(self) -> bool:
+        return self.suffix == "py"
+
     def delete_path(self) -> None:
         os.remove(self.os_path)
 
@@ -85,14 +89,18 @@ class Path:
     def join(self, *path_parts: str) -> "Path":
         return Path(path_parts=self._path_parts + list(path_parts))
 
+    def without_suffix(self) -> "Path":
+        return self.dir_path().join(self.filename_nosuffix)
+
     def relative(self, *, root: "Path") -> Union["Path", None]:
         if root == self[: len(root)]:
             return self[len(root) :]
 
     def module_form(self, *, root: "Path") -> str | None:
-        if self.suffix == "py" and not self.is_dir():
+        if self.is_module and not self.is_dir():
             rel_path = self.relative(root=root)
-            return f'{".".join(rel_path.path_parts[-1:])}.{rel_path.filename}'
+            rel_no_suffix = rel_path.without_suffix()
+            return ".".join(rel_no_suffix.path_parts)
 
     @contextmanager
     def open(
