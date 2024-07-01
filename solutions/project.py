@@ -19,3 +19,16 @@ class PyMainTestManager(TestManager):
         return True
 
     __slots__ = tuple()
+
+
+class PyMainTree:
+
+    @staticmethod
+    def _project_root() -> PyMainRoot:
+        return PyMainRoot()
+
+    @staticmethod
+    def _project_ignore_manager() -> PyMainIgnoreManager:
+        return PyMainIgnoreManager()
+
+    __slots__ = tuple()
