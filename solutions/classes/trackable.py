@@ -1,7 +1,7 @@
 from solutions.interface.colors import TextColors
 
 
-_ERR_VALTYPE = "Value must be of type {val_type}."
+_ERR_VALTYPE = "{value} must be of type {val_type}."
 _T_ERR_VALTYPE = TextColors.temp_red(_ERR_VALTYPE)
 
 
@@ -24,7 +24,7 @@ class Trackable:
 
     def _assert_value(self, *, value: object) -> None:
         if not isinstance(value, self._val_type):
-            raise TypeError(_T_ERR_VALTYPE.format(val_type=self._val_type))
+            raise TypeError(_T_ERR_VALTYPE.format(value=value, val_type=self._val_type))
 
         if not self._check_constraints(value=value):
             raise ValueError(self._err_value_msg)
