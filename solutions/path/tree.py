@@ -27,6 +27,7 @@ class Tree:
             if cls._is_ignored(path=dirpath):
                 continue
 
+            tree.append(dirpath)
             for file in file_names:
                 filepath = dirpath.join(file)
                 if cls._is_ignored(path=filepath):
