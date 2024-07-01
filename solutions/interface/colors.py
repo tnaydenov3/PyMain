@@ -30,14 +30,14 @@ class LogColors:
         return _COLOR_DICT.get(color, _COLOR_RESET)
 
     @classmethod
-    def _color_placeholders_args(cls, text: str, *args: str) -> str:
+    def _color_placeholders_args(cls, text: str, /, *args: str) -> str:
         colors = list(args)
         last_color = ""
         colored_text = ""
 
         for char in text:
             if char == "{":
-                last_color = colors.pop(index=0) if colors else last_color
+                last_color = colors.pop(0) if colors else last_color
                 color_mod = cls._get_color_mod_str(color=last_color)
                 colored_text += f"{color_mod}{char}"
             elif char == "}":
@@ -63,10 +63,10 @@ class LogColors:
 
     @classmethod
     def color_template(cls, template: str, /, *args, **kwargs) -> str:
+        if args:
+            template = cls._color_placeholders_args(template, *args)
         if kwargs:
             template = cls._color_placeholders_kwargs(text=template, **kwargs)
-        if args:
-            template = cls._color_placeholders_args(text=template, *args)
 
         return template
 
