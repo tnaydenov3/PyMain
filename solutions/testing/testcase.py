@@ -53,7 +53,8 @@ class PyMainTestCase:
         except AssertionError as error:
             end_time = time.perf_counter_ns()
 
-            error_func = error.__traceback__.tb_frame.f_code.co_name
+            error_func = None
+
             if error_func == self._func.__name__:
                 self._result = self.FAIL
             else:
