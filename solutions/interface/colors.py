@@ -29,20 +29,20 @@ class LogColors:
     def _get_color_mod_str(color: str) -> str:
         return _COLOR_DICT.get(color, _COLOR_RESET)
 
-    @staticmethod
-    def _color_placeholders(text: str, **kwargs) -> str:
-        for placeholder_name, color in kwargs.items():
-            placeholder = f"{{{placeholder_name}}}"
-            color_mod = LogColors._get_color_mod_str(color=color)
-            placeholder_colored = f"{color_mod}{placeholder}{_COLOR_RESET}"
-            text = text.replace(placeholder, placeholder_colored)
-
-        return text
-
     @classmethod
     def color_text(cls, *, text: str, color: str) -> str:
         color_mod_str = cls._get_color_mod_str(color=color)
         return f"{color_mod_str}{text}{_COLOR_RESET}"
+
+    @classmethod
+    def color_placeholders(cls, text: str, **kwargs) -> str:
+        for placeholder_name, color in kwargs.items():
+            placeholder = f"{{{placeholder_name}}}"
+            color_mod = cls._get_color_mod_str(color=color)
+            placeholder_colored = f"{color_mod}{placeholder}{_COLOR_RESET}"
+            text = text.replace(placeholder, placeholder_colored)
+
+        return text
 
     __slots__ = tuple()
 
