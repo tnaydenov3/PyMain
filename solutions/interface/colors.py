@@ -44,8 +44,21 @@ class LogColors:
         return text
 
     @classmethod
-    def color_placeholders_args(cls, text: str, *args) -> str:
-        pass
+    def color_placeholders_args(cls, text: str, *args: str) -> str:
+        colors = list[args]
+        last_color = ""
+        colored_text = ""
+
+        for char in text:
+            if char == "{":
+                last_color = colors.pop(0) if colors else last_color
+                colored_text += f"{last_color}{char}"
+            elif char == "}":
+                colored_text += f"{char}{_COLOR_RESET}"
+            else:
+                colored_text += char
+
+        return colored_text
 
     __slots__ = tuple()
 
