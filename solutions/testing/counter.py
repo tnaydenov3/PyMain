@@ -10,6 +10,7 @@ class TestsCounter:
         self._failed = 0
         self._error = 0
         self._total = 0
+        self._time_ns = 0
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} (total_ran: {self._total})>"
@@ -30,15 +31,22 @@ class TestsCounter:
     def total(self) -> int:
         return self._total
 
+    @property
+    def time_ns(self) -> int:
+        return self._time_ns
+
     def all_passed(self) -> bool:
         return self._passed == self._total
 
-    def increment_counter(self, result: str) -> None:
+    def increment_counter(self, testcase: TestCase) -> None:
         self._total += 1
-        match result:
+
+        match testcase.result:
             case TestCase.PASS:
                 self._passed += 1
             case TestCase.FAIL:
                 self._failed += 1
             case TestCase.ERROR:
                 self._error += 1
+
+        self._time_ns += testcase.time_ns
