@@ -3,28 +3,22 @@ from solutions.interface.colors import TextColors
 from solutions.path.path import Path
 
 _ERR_F_MISSING = "File {path} does not exist!"
-_T_ERR_F_MISSING = TextColors.col_templ_custom(
-    _ERR_F_MISSING,
-    path=TextColors.RED,
-)
-
+_T_ERR_F_MISSING = TextColors.temp_red(_ERR_F_MISSING)
 
 _MSG_ALRD_EXIST = "File {path} already exists, skipping."
-_T_MSG_ALRD_EXIST = TextColors.col_templ_custom(
-    _MSG_ALRD_EXIST,
-    path=TextColors.YELLOW,
-)
+_T_MSG_ALRD_EXIST = TextColors.temp_yellow(_MSG_ALRD_EXIST)
 
 _MSG_DEL_FILE = "{path} deleted."
-_T_MSG_DEL_FILE = TextColors._color_placeholders_kwargs(
-    text=_MSG_DEL_FILE,
-    path=TextColors.GREEN,
-)
-
+_T_MSG_DEL_FILE = TextColors.temp_yellow(_MSG_DEL_FILE)
 
 _MSG_ABORT_FILE = "File {path} aborted. (error: {error})"
+_T_MSG_ABORT_FILE = TextColors.temp_red(_MSG_ABORT_FILE)
+
 _MSG_WORK_BEGIN = "Beginning {action} on <{main_attr}>..."
+_T_MSG_WORK_BEGIN = TextColors.temp_yellow(_MSG_WORK_BEGIN)
+
 _MSG_WORK_FINISHED = "Finished {action} on <{main_attr}>."
+_T_MSG_WORK_FINISHED = TextColors.temp_green(_MSG_WORK_FINISHED)
 
 
 class FileHandler(Loggable):
