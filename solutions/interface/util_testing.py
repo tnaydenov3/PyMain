@@ -1,9 +1,7 @@
 from unittest import TestCase
 
-from solutions.interface.console import ConsoleLogger
 
-
-class TestsLogger:
+class TestingLogerUtil:
 
     @classmethod
     def _make_testcase_log_msg(cls, testcase: TestCase) -> str:
