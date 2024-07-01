@@ -1,7 +1,7 @@
 from contextlib import contextmanager
 from io import TextIOWrapper
 import os
-from typing import Generator
+from typing import Generator, Union
 
 UNIX_SEP = "/"
 WINDOWS_SEP = "\\"
@@ -33,7 +33,7 @@ class Path:
     def __len__(self) -> int:
         return len(self._path_parts)
 
-    def __eq__(self, other: "Path" | list[str]) -> bool:
+    def __eq__(self, other: Union["Path", list[str]]) -> bool:
         if isinstance(other, Path):
             return self._path_parts == other.path_parts
         elif isinstance(other, list):
@@ -78,7 +78,7 @@ class Path:
     def join(self, *path_parts: str) -> "Path":
         return Path(path_parts=self._path_parts + list(path_parts))
 
-    def relative(self, *, root: "Path") -> "Path" | None:
+    def relative(self, *, root: "Path") -> Union["Path", None]:
         if root == self.path_parts[: len(root)]:
             return Path(path_parts=self.path_parts[len(root) :])
 
