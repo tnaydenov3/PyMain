@@ -1,6 +1,7 @@
+from solutions.project import PyMainIgnoreManager, PyMainTestManager
 from solutions.root import PyMainRoot
-from solutions.testing.manager import PyMainTestManager
 
 
 PyMainRoot()
 PyMainTestManager()
+PyMainIgnoreManager()
