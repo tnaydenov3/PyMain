@@ -52,7 +52,7 @@ class ConsoleTestingLoggerUtil:
             case _:
                 raise NotImplementedError
 
-        time = ConsoleUtil.time_nanosecs_to_human_readable(time_ns=time_ns)
+        time = ConsoleUtil.time_nanosecs_to_human_readable(time_ns)
 
         log_message = _T_TESTCASE_LOG.format(
             result=result,
@@ -71,7 +71,7 @@ class ConsoleTestingLoggerUtil:
         error = test_counter.error
         time_ns = test_counter.time_ns
 
-        time = ConsoleUtil.time_nanosecs_to_human_readable(time_ns=time_ns)
+        time = ConsoleUtil.time_nanosecs_to_human_readable(time_ns)
 
         if test_counter.all_passed():
             log_message = _T_TOTAL_ALLPASS.format(passed=passed, total=total, time=time)
