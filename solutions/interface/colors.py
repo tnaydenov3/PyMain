@@ -48,18 +48,18 @@ class TextColors:
         return colored_text
 
     @classmethod
-    def _color_placeholders_kwargs(cls, *, text: str, **kwargs) -> str:
-        for placeholder_name, color in kwargs.items():
-            placeholder = f"{{{placeholder_name}}}"
-            placeholder_colored = cls._color_text(text=placeholder, color=color)
-            text = text.replace(placeholder, placeholder_colored)
-
-        return text
-
-    @classmethod
     def _color_text(cls, text: str, /, *, color: str) -> str:
         color_mod_str = cls._get_color_mod_str(color=color)
         return f"{color_mod_str}{text}{_COLOR_RESET}"
+
+    @classmethod
+    def _color_placeholders_kwargs(cls, *, text: str, **kwargs) -> str:
+        for placeholder_name, color in kwargs.items():
+            placeholder = f"{{{placeholder_name}}}"
+            placeholder_colored = cls._color_text(placeholder, color=color)
+            text = text.replace(placeholder, placeholder_colored)
+
+        return text
 
     @classmethod
     def red(cls, text: str, /) -> str:
