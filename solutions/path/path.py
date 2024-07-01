@@ -11,6 +11,10 @@ class Path:
 
     _DEFAULT_SEP = UNIX_SEP
 
+    @staticmethod
+    def _normalize_case(path: str) -> str:
+        return os.path.normcase(path)
+
     @classmethod
     def _str_to_default_sep(cls, path_str: str) -> str:
         norm_path = os.path.normpath(path=path_str)
@@ -20,8 +24,14 @@ class Path:
         return norm_path
 
     @classmethod
+    def _normalize_path(cls, path: str) -> str:
+        norm_case = cls._normalize_case(path=path)
+        norm_sep = cls._str_to_default_sep(path_str=norm_case)
+        return norm_sep
+
+    @classmethod
     def from_string(cls, path_str: str) -> "Path":
-        normalized_path = cls._str_to_default_sep(path_str=path_str)
+        normalized_path = cls._normalize_path(path_str=path_str)
         path_parts = normalized_path.split(sep=cls._DEFAULT_SEP)
 
         return Path(path_parts=path_parts)
