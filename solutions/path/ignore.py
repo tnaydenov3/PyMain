@@ -26,8 +26,28 @@ class IgnoreManager(Singleton):
 
         raise FileNotFoundError(_GITIGNORE_FILE)
 
-    __slots__ = ("_ignore_list",)
+    __slots__ = (
+        "_gitignore",
+        "_ignore_patterns",
+    )
 
     def __init__(self) -> None:
         self._gitignore = self._find_gitignore()
-        self._ignore_list = []
+        self._ignore_patterns = self._load_ignore_patterns()
+
+    @property
+    def ignore_patterns(self) -> list[Path]:
+        return self._ignore_patterns
+
+    def _load_ignore_patterns(self) -> list[Path]:
+        patterns_list = []
+
+        with self._gitignore.open() as gi_file:
+            for line in gi_file:
+                item = line.strip()
+                if not item or item.startswith("#"):
+                    continue
+
+                patterns_list.append(Path.from_string(path_str=item))
+
+        return patterns_list
