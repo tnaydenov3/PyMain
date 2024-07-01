@@ -1,5 +1,5 @@
 from solutions.classes.singleton import Singleton
-from solutions.testing.testcase import TestCase
+from solutions.testing.testcase import PyMainTestCase
 
 
 def _init_test() -> None:
@@ -16,6 +16,6 @@ def _init_test() -> None:
     return SingletonOne, SingletonTwo
 
 
-@TestCase
+@PyMainTestCase
 def test_singleton() -> None:
     pass

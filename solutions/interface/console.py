@@ -1,8 +1,8 @@
 import sys
 
 from solutions.interface.console_t import ConsoleTestingLoggerUtil
-from solutions.testing.counter import TestsCounter
-from solutions.testing.testcase import TestCase
+from solutions.testing.counter import TestResultCounter
+from solutions.testing.testcase import PyMainTestCase
 
 _UTIL_PREV_LINE = "\033[F"
 _UTIL_CLEAR_PREV_LINE = "\033[F\033[K"
@@ -24,12 +24,12 @@ class ConsoleLogger:
         cls._log_to_console(message=log_msg)
 
     @classmethod
-    def log_test_result(cls, testcase: TestCase) -> None:
+    def log_test_result(cls, testcase: PyMainTestCase) -> None:
         log_msg = ConsoleTestingLoggerUtil.make_testcase_log_msg(testcase=testcase)
         cls._log_to_console(message=log_msg)
 
     @classmethod
-    def log_testpack_result(cls, counter: TestsCounter) -> None:
+    def log_testpack_result(cls, counter: TestResultCounter) -> None:
         log_msg = ConsoleTestingLoggerUtil.make_testpack_log_msg(test_counter=counter)
         cls._log_to_console(message=log_msg)
 

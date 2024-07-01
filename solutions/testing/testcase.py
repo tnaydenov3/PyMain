@@ -2,7 +2,7 @@ import time
 from types import FunctionType
 
 
-class TestCase:
+class PyMainTestCase:
 
     PASS = "PASS"
     FAIL = "FAIL"

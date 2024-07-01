@@ -1,7 +1,7 @@
-from solutions.testing.testcase import TestCase
+from solutions.testing.testcase import PyMainTestCase
 
 
-class TestsCounter:
+class TestResultCounter:
 
     __slots__ = ("_passed", "_failed", "_error", "_total", "_time_ns")
 
@@ -38,15 +38,15 @@ class TestsCounter:
     def all_passed(self) -> bool:
         return self._passed == self._total
 
-    def increment_counter(self, testcase: TestCase) -> None:
+    def increment_counter(self, testcase: PyMainTestCase) -> None:
         self._total += 1
 
         match testcase.result:
-            case TestCase.PASS:
+            case PyMainTestCase.PASS:
                 self._passed += 1
-            case TestCase.FAIL:
+            case PyMainTestCase.FAIL:
                 self._failed += 1
-            case TestCase.ERROR:
+            case PyMainTestCase.ERROR:
                 self._error += 1
 
         self._time_ns += testcase.time_ns

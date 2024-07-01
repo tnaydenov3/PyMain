@@ -1,6 +1,6 @@
 from solutions.interface.util import ConsoleUtil
-from solutions.testing.counter import TestsCounter
-from solutions.testing.testcase import TestCase
+from solutions.testing.counter import TestResultCounter
+from solutions.testing.testcase import PyMainTestCase
 
 _MSG_RESULT_VAL_PASSFAIL = "{result}"
 _MSG_RESULT_VAL_ERROR = "{result} ({error})"
@@ -17,16 +17,16 @@ _MSG_TOTAL_DEFAULT = (
 class ConsoleTestingLoggerUtil:
 
     @classmethod
-    def make_testcase_log_msg(cls, testcase: TestCase) -> str:
+    def make_testcase_log_msg(cls, testcase: PyMainTestCase) -> str:
         result_val = testcase.result
         module = testcase.func_module
         func_name = testcase.func_name
         time_ns = testcase.time_ns
 
         match result_val:
-            case TestCase.PASS | TestCase.FAIL:
+            case PyMainTestCase.PASS | PyMainTestCase.FAIL:
                 result = _MSG_RESULT_VAL_PASSFAIL.format(result=result_val)
-            case TestCase.ERROR:
+            case PyMainTestCase.ERROR:
                 result = _MSG_RESULT_VAL_ERROR.format(
                     result=result_val, error=testcase.error
                 )
@@ -45,7 +45,7 @@ class ConsoleTestingLoggerUtil:
         return log_message
 
     @classmethod
-    def make_testpack_log_msg(cls, test_counter: TestsCounter) -> str:
+    def make_testpack_log_msg(cls, test_counter: TestResultCounter) -> str:
         total = test_counter.total
         passed = test_counter.passed
         failed = test_counter.failed
