@@ -22,7 +22,7 @@ class Tree:
 
     def __init__(self, root: Path) -> None:
         self._root = root
-        self._tree = None
+        self._tree = self._get_tree(root=root)
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} ({self._root})>"
@@ -40,3 +40,6 @@ class Tree:
     @property
     def tree(self) -> list[Path]:
         return self._tree
+
+    def get_modules(self) -> list[Path]:
+        return [path for path in self._tree if path.is_module()]
