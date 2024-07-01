@@ -45,14 +45,15 @@ class LogColors:
 
     @classmethod
     def color_placeholders_args(cls, text: str, *args: str) -> str:
-        colors = list[args]
+        colors = list(args)
         last_color = ""
         colored_text = ""
 
         for char in text:
             if char == "{":
-                last_color = colors.pop(0) if colors else last_color
-                colored_text += f"{last_color}{char}"
+                last_color = colors.pop(index=0) if colors else last_color
+                color_mod = cls._get_color_mod_str(color=last_color)
+                colored_text += f"{color_mod}{char}"
             elif char == "}":
                 colored_text += f"{char}{_COLOR_RESET}"
             else:
