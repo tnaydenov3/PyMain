@@ -31,7 +31,7 @@ class Path:
 
     @classmethod
     def from_string(cls, path_str: str) -> "Path":
-        normalized_path = cls._normalize_path(path_str=path_str)
+        normalized_path = cls._normalize_path(path=path_str)
         path_parts = normalized_path.split(sep=cls._DEFAULT_SEP)
 
         return Path(path_parts=path_parts)
