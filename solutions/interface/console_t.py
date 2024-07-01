@@ -4,7 +4,7 @@ from solutions.testing.counter import TestResultCounter
 from solutions.testing.testcase import PyMainTestCase
 
 MSG_PASS = TextColors.green(PyMainTestCase.PASS)
-MSG_FAIL = TextColors.red(PyMainTestCase.FAIL)
+MSG_FAIL = TextColors.yellow(PyMainTestCase.FAIL)
 MSG_ERROR = TextColors.red(PyMainTestCase.ERROR)
 
 _T_RESULT_ERROR = f"{MSG_ERROR}: {{error}}"
