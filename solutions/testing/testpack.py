@@ -29,12 +29,12 @@ class TestPack:
         for testcase in self._testcases:
             testcase.run()
 
-        match testcase.result:
-            case TestCase.PASS:
-                self._passed += 1
-            case TestCase.FAIL:
-                self._failed += 1
-            case TestCase.ERROR:
-                self._error += 1
+            match testcase.result:
+                case TestCase.PASS:
+                    self._passed += 1
+                case TestCase.FAIL:
+                    self._failed += 1
+                case TestCase.ERROR:
+                    self._error += 1
 
-        ConsoleLogger.log_test_result(testcase=testcase)
+            ConsoleLogger.log_test_result(testcase=testcase)
