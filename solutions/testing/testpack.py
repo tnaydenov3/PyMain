@@ -5,7 +5,7 @@ from solutions.testing.testcase import TestCase
 
 class TestPack:
 
-    __slots__ = ("_testcases", "_passed", "_failed", "_error")
+    __slots__ = ("_testcases", "_counter")
 
     def __init__(self) -> None:
         self._testcases: list[TestCase] = []
