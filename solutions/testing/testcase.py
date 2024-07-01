@@ -1,7 +1,5 @@
 from types import FunctionType
 
-_LOG_MSG = "{result} | {module} | {funcname} | {time}"
-
 
 class TestCase:
 
