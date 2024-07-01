@@ -10,7 +10,7 @@ _MSG_TESTCASE = "{result} | {module} | {func_name} | {time}"
 class ConsoleTestingLoggerUtil:
 
     @classmethod
-    def _make_testcase_log_msg(cls, testcase: TestCase) -> str:
+    def make_testcase_log_msg(cls, testcase: TestCase) -> str:
         result_val = testcase.result
         module = testcase.func_module
         func_name = testcase.func_name

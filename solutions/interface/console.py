@@ -24,7 +24,7 @@ class ConsoleLogger:
 
     @classmethod
     def log_test_result(cls, testcase: TestCase) -> None:
-        log_msg = ConsoleTestingLoggerUtil._make_testcase_log_msg(testcase=testcase)
+        log_msg = ConsoleTestingLoggerUtil.make_testcase_log_msg(testcase=testcase)
         cls._log_to_console(message=log_msg)
 
     @classmethod
