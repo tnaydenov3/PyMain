@@ -1,7 +1,6 @@
 from solutions.interface.colors import TextColors
 from solutions.interface.console import ConsoleLogger
-from solutions.project import PyMainTree
-from solutions.testing.runner import TestRunner
+from solutions.project import PyMainTestRunner, PyMainTree
 
 _MSG_INVALID_COMMAND = 'Invalid command "{command}".'
 _T_INVALID_COMMAND = TextColors.temp_red(_MSG_INVALID_COMMAND)
@@ -13,7 +12,7 @@ class Commands:
 
     @staticmethod
     def run_project_tests() -> None:
-        TestRunner().run_tree(tree=PyMainTree.get_project_tree())
+        PyMainTestRunner().run_tree(tree=PyMainTree.get_project_tree())
 
     __slots__ = tuple()
 
