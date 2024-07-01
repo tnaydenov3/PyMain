@@ -1,7 +1,7 @@
 FILE_SIZE_UNITS = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
 FILE_SIZE_MULTIPLE = 1024
 
-_SIZE_NUM_ROUNDING_DECIMALS = 2
+_FILE_SIZE_ROUNDING_DECIMALS = 2
 
 
 class SizeBytesUtil:
@@ -15,7 +15,7 @@ class SizeBytesUtil:
                 break
             size_num /= FILE_SIZE_MULTIPLE
 
-        size_num = round(number=size_num, ndigits=_SIZE_NUM_ROUNDING_DECIMALS)
+        size_num = round(number=size_num, ndigits=_FILE_SIZE_ROUNDING_DECIMALS)
 
         return size_num, unit
 
