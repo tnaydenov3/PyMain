@@ -76,3 +76,12 @@ class Tree:
         return [
             path.module_form(root=self._root) for path in self._tree if path.is_module
         ]
+
+    def _get_modules_str(self) -> str:
+        return "\n".join([mod_form for mod_form in self.get_module_forms()])
+
+    def print_tree_paths(self) -> None:
+        print(self)
+
+    def print_modules(self) -> None:
+        print(self._get_modules_str())
