@@ -14,7 +14,7 @@ class ConsoleLogger:
     _LOG_TEMPL = "[{prefix}] {message}"
 
     @staticmethod
-    def _log_to_console(message: str, /, *, newline: bool = True) -> None:
+    def _log_to_console(*, message: str, newline: bool = True) -> None:
         eol = "\n" if newline else ""
         sys.stdout.write(f"{message}{eol}")
         sys.stdout.flush()
