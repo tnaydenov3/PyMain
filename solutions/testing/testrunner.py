@@ -1,21 +1,12 @@
+from solutions.classes.singleton import Singleton
+from solutions.path.path import Path
+from solutions.path.root import Root
 from solutions.testing.testpack import TestPack
 
 
-class TestRunner:
+class TestRunner(Singleton):
 
-    @staticmethod
-    def _find_local_tests(file: str) -> TestPack:
-        pass
+    __slots__ = ("_root",)
 
-    @staticmethod
-    def run_local(file: str) -> None:
-        pass
-
-    @staticmethod
-    def run_global(file) -> None:
-        pass
-
-    __slots__ = tuple()
-
-    def __init__(self) -> None:
-        raise NotImplementedError
+    def __init__(self, root: Root) -> None:
+        self._root = root.root
