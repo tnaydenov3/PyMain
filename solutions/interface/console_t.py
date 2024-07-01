@@ -74,12 +74,10 @@ class ConsoleTestingLoggerUtil:
         time = ConsoleUtil.time_nanosecs_to_human_readable(time_ns=time_ns)
 
         if test_counter.all_passed():
-            log_message = _MSG_TOTAL_ALLPASS.format(
-                passed=passed, total=total, time=time
-            )
+            log_message = _T_TOTAL_ALLPASS.format(passed=passed, total=total, time=time)
 
         else:
-            log_message = _MSG_TOTAL_DEFAULT.format(
+            log_message = _T_TOTAL_DEFAULT.format(
                 total=total, passed=passed, failed=failed, error=error, time=time
             )
 
