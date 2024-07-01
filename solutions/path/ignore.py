@@ -27,11 +27,11 @@ class IgnoreManager(Singleton):
 
         while not path == path.dir_path():
             if path.join(_GITIGNORE_FILE).exists():
-                return path.join(_ERR_FILE_NOT_FOUND)
+                return path.join(_GITIGNORE_FILE)
 
             path = path.dir_path()
 
-        raise FileNotFoundError(_GITIGNORE_FILE)
+        raise FileNotFoundError(_ERR_FILE_NOT_FOUND)
 
     __slots__ = (
         "_gitignore",
