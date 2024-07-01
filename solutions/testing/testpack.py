@@ -1,4 +1,5 @@
 from solutions.interface.console import ConsoleLogger
+from solutions.testing.counter import TestsCounter
 from solutions.testing.testcase import TestCase
 
 
@@ -8,9 +9,7 @@ class TestPack:
 
     def __init__(self) -> None:
         self._testcases: list[TestCase] = []
-        self._passed = 0
-        self._failed = 0
-        self._error = 0
+        self._counter = TestsCounter()
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} (total_tests: {len(self._testcases)})>"
