@@ -1,5 +1,7 @@
 from unittest import TestCase
 
+_MSG_TESTCASE = "{result} | {module} | {func_name} | {time}"
+
 
 class TestingLogerUtil:
 
