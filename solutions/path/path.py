@@ -30,6 +30,15 @@ class Path:
     def __str__(self) -> str:
         return self._DEFAULT_SEP.join(self._path_parts)
 
+    def __len__(self) -> int:
+        return len(self._path_parts)
+
+    def __eq__(self, other: "Path" | list[str]) -> bool:
+        if isinstance(other, Path):
+            return self._path_parts == other.path_parts
+        elif isinstance(other, list):
+            return self._path_parts == other
+
     @property
     def path_parts(self) -> list[str]:
         return self._path_parts
@@ -68,6 +77,14 @@ class Path:
 
     def join(self, *path_parts: str) -> "Path":
         return Path(path_parts=self._path_parts + list(path_parts))
+
+    def relative(self, *, root: "Path") -> "Path" | None:
+        if root == self.path_parts[: len(root)]:
+            return Path(path_parts=self.path_parts[len(root) :])
+
+    def module_form(self, *, root: "Path") -> str | None:
+        if self.suffix == "py" and not self.is_dir():
+            pass
 
     @contextmanager
     def open(
