@@ -24,6 +24,9 @@ class Tree:
         for dirpath_str, _, file_names in os.walk(top=root.os_path):
             dirpath = Path.from_string(path_str=dirpath_str)
 
+            if cls._is_ignored(path=dirpath):
+                continue
+
             for file in file_names:
                 filepath = dirpath.join(file)
                 if cls._is_ignored(path=filepath):
