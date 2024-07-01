@@ -14,7 +14,7 @@ class ConsoleLogger:
     _LOG_TEMP = "[{prefix}] {message}"
 
     @staticmethod
-    def _log_to_console(message: str, *, newline: bool = True) -> None:
+    def _log_to_console(message: str, /, *, newline: bool = True) -> None:
         eol = "\n" if newline else ""
         sys.stdout.write(f"{message}{eol}")
         sys.stdout.flush()
@@ -23,6 +23,7 @@ class ConsoleLogger:
     def log(
         cls,
         message: str,
+        /,
         *,
         prefix: str,
         color_msg: str = None,
@@ -37,12 +38,12 @@ class ConsoleLogger:
         cls._log_to_console(message=log_msg)
 
     @classmethod
-    def log_test_result(cls, testcase: PyMainTestCase) -> None:
+    def log_test_result(cls, *, testcase: PyMainTestCase) -> None:
         log_msg = ConsoleTestingLoggerUtil.make_testcase_log_msg(testcase=testcase)
         cls._log_to_console(message=log_msg)
 
     @classmethod
-    def log_testpack_result(cls, counter: TestResultCounter) -> None:
+    def log_testpack_result(cls, *, counter: TestResultCounter) -> None:
         log_msg = ConsoleTestingLoggerUtil.make_testpack_log_msg(test_counter=counter)
         cls._log_to_console(message=log_msg)
 
