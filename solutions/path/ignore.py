@@ -10,15 +10,15 @@ _ERR_FILE_NOT_FOUND = f'"{_GITIGNORE_FILE}" file not found.'
 class IgnoreManager(Singleton):
 
     @staticmethod
+    def _project_root() -> Root:
+        raise NotImplementedError
+
+    @staticmethod
     def _match_pattern(path: Path, pattern: Path) -> bool:
         window_size = len(pattern)
         for i in range(len(path) - window_size + 1):
             if path[i : i + window_size] == pattern:
                 return True
-
-    @staticmethod
-    def _project_root() -> Root:
-        raise NotImplementedError
 
     @classmethod
     def _find_gitignore(cls) -> Path:
@@ -58,3 +58,9 @@ class IgnoreManager(Singleton):
                 patterns_list.append(Path.from_string(path_str=item))
 
         return patterns_list
+
+    def is_ignored(self, path: Path) -> bool:
+        return any(
+            self._match_pattern(path=path, pattern=pattern)
+            for pattern in self._ignore_patterns
+        )
