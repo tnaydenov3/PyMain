@@ -1,4 +1,11 @@
+from solutions.testing.testpack import TestPack
+
+
 class TestRunner:
+
+    @staticmethod
+    def _find_local_tests(file: str) -> TestPack:
+        pass
 
     @staticmethod
     def run_local(file: str) -> None:
