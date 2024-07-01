@@ -33,6 +33,13 @@ class Path:
     def __len__(self) -> int:
         return len(self._path_parts)
 
+    def __getitem__(self, index: int) -> "Path":
+        sub_parts = self._path_parts[index]
+        if isinstance(sub_parts, list):
+            return self.__class__(path_parts=sub_parts)
+        elif isinstance(sub_parts, str):
+            return Path(path_parts=[sub_parts])
+
     def __eq__(self, other: Union["Path", list[str]]) -> bool:
         if isinstance(other, Path):
             return self._path_parts == other.path_parts
