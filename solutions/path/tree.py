@@ -23,7 +23,7 @@ class Tree:
         tree = []
         for dirpath_str, _, file_names in os.walk(top=root.os_path):
             dirpath = Path.from_string(path_str=dirpath_str)
-            
+
             for file in file_names:
                 filepath = dirpath.join(file)
                 if cls._is_ignored(path=filepath):
@@ -31,6 +31,11 @@ class Tree:
 
                 tree.append(filepath)
         return tree
+
+    @classmethod
+    def get_project_tree(cls) -> "Tree":
+        root = cls._project_root().root
+        return cls(root=root)
 
     @classmethod
     def from_file_string(cls, path_str: str) -> "Tree":
