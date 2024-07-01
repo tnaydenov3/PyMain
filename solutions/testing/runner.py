@@ -16,7 +16,7 @@ class TestRunner(Singleton):
     __slots__ = ("_root", "_test_pack")
 
     def __init__(self) -> None:
-        self._root: Root = self._project_root()
+        self._root: Root = self._project_root().root
         self._test_pack = PyMainTestPack()
 
     def _load_test_from_module(self, *, module: ModuleType) -> None:
