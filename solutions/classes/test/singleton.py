@@ -18,4 +18,19 @@ def _init_test() -> None:
 
 @PyMainTestCase
 def test_singleton() -> None:
-    pass
+    s_class_one, _ = _init_test()
+
+    obj_1 = s_class_one()
+    obj_2 = s_class_one()
+
+    assert obj_1 is obj_2
+
+
+@PyMainTestCase
+def test_singleton_diff_class() -> None:
+    s_class_one, s_class_two = _init_test()
+
+    obj_1 = s_class_one()
+    obj_2 = s_class_two()
+
+    assert not obj_1 is obj_2
