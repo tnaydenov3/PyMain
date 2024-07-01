@@ -70,4 +70,4 @@ class Tree:
         return self._tree
 
     def get_modules(self) -> list[Path]:
-        return [path for path in self._tree if path.is_module()]
+        return [path for path in self._tree if path.is_module]
