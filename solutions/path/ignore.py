@@ -44,7 +44,7 @@ class IgnoreManager(Singleton):
 
         with self._gitignore.open() as gi_file:
             for line in gi_file:
-                item = line.strip()
+                item = line.strip().replace("*", "")
                 if not item or item.startswith("#"):
                     continue
 
