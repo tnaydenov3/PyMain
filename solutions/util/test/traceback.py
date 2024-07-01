@@ -14,9 +14,9 @@ def test_get_error_frame() -> None:
         _raise_error()
 
     except Exception as error:
+        Debug.log(Tracebacks.get_error_frame(error=error))
         assert Tracebacks.get_error_frame(error=error) == None
 
-    Debug.log(Tracebacks.get_error_frame(error=error))
 
 
 if __name__ == "__main__":
