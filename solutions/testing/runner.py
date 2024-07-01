@@ -37,7 +37,7 @@ class TestRunner(Singleton):
     def run_local(self, file: str) -> None:
         self._test_pack = PyMainTestPack()
         file_path = Path.from_string(path_str=file)
-        self._load_tests_from_path(path=file_path)
+        self._load_tests_from_path(file_path=file_path)
         self._test_pack.run()
 
     def run_tree(self, tree: Tree) -> None:
