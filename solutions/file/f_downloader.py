@@ -77,6 +77,9 @@ class FileDownloader(FileHandler):
             anim_object.start()
             self._download_file()
 
+        except Exception as error:
+            raise error
+
         finally:
             anim_object.stop()
 
