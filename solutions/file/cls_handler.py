@@ -1,11 +1,19 @@
 from solutions.classes.loggable import Loggable
+from solutions.interface.colors import LogColors
 from solutions.path.path import Path
 
-_ERR_FILE_MISSING = "File {path} does not exist!"
+_ERR_F_MISSING = "File {path} does not exist!"
+_T_ERR_F_MISSING = LogColors.color_placeholders(text=_ERR_F_MISSING, path=LogColors.RED)
 
-_SKIP_FILE_ALRD_EXISTS = "File {path} already exists, skipping."
+_MSG_FILE_ALRD_EXISTS = "File {path} already exists, skipping."
+_MSG_TEMP_FILE_ALRD_EXISTS = LogColors.color_placeholders(
+    text=_MSG_FILE_ALRD_EXISTS,
+    path=LogColors.YELLOW,
+)
 
-_MSG_DELETE_FILE = "{path} deleted."
+_MSG_TEMP_DELETE_FILE = "{path} deleted."
+
+
 _MSG_ABORT_FILE = "File {path} aborted. (error: {error})"
 _MSG_WORK_BEGIN = "Beginning {action} on <{main_attr}>..."
 _MSG_WORK_FINISHED = "Finished {action} on <{main_attr}>."
@@ -86,17 +94,17 @@ class FileHandler(Loggable):
     @Loggable.logfunction
     def _log_missing(self) -> str:
         path = self._target_path.os_path
-        return _ERR_FILE_MISSING.format(path=path)
+        return _T_ERR_F_MISSING.format(path=path)
 
     @Loggable.logfunction
     def _log_skipping(self) -> str:
         path = self._target_path.os_path
-        return _SKIP_FILE_ALRD_EXISTS.format(path=path)
+        return _MSG_TEMP_FILE_ALRD_EXISTS.format(path=path)
 
     @Loggable.logfunction
     def _log_deleted(self) -> str:
         path = self._target_path.os_path
-        return _MSG_DELETE_FILE.format(path=path)
+        return _MSG_TEMP_DELETE_FILE.format(path=path)
 
     @Loggable.logfunction
     def _log_aborted(self, error: Exception) -> str:
