@@ -1,4 +1,5 @@
-from unittest import TestCase
+from solutions.testing.testcase import TestCase
+
 
 _MSG_TESTCASE = "{result} | {module} | {func_name} | {time}"
 
@@ -7,7 +8,7 @@ class ConsoleTestingLoggerUtil:
 
     @classmethod
     def _make_testcase_log_msg(cls, testcase: TestCase) -> str:
-        pass
+        result = testcase.result
 
     __slots__ = tuple()
 
