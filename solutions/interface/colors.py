@@ -30,6 +30,11 @@ class TextColors:
         return _COLOR_DICT.get(color, _COLOR_RESET)
 
     @classmethod
+    def _color_text(cls, text: str, /, *, color: str) -> str:
+        color_mod_str = cls._get_color_mod_str(color=color)
+        return f"{color_mod_str}{text}{_COLOR_RESET}"
+
+    @classmethod
     def _color_placeholders_args(cls, text: str, /, *args: str) -> str:
         colors = list(args)
         last_color = ""
@@ -46,11 +51,6 @@ class TextColors:
                 colored_text += char
 
         return colored_text
-
-    @classmethod
-    def _color_text(cls, text: str, /, *, color: str) -> str:
-        color_mod_str = cls._get_color_mod_str(color=color)
-        return f"{color_mod_str}{text}{_COLOR_RESET}"
 
     @classmethod
     def _color_placeholders_kwargs(cls, *, text: str, **kwargs) -> str:
@@ -74,7 +74,19 @@ class TextColors:
         return cls._color_text(text, color=cls.YELLOW)
 
     @classmethod
-    def col_templ(cls, template: str, /, *args, **kwargs) -> str:
+    def temp_red(cls, text: str, /) -> str:
+        return cls._color_placeholders_args(text, cls.RED)
+
+    @classmethod
+    def temp_green(cls, text: str, /) -> str:
+        return cls._color_placeholders_args(text, cls.GREEN)
+
+    @classmethod
+    def temp_yellow(cls, text: str, /) -> str:
+        return cls._color_placeholders_args(text, cls.YELLOW)
+
+    @classmethod
+    def col_templ_custom(cls, template: str, /, *args, **kwargs) -> str:
         if args:
             template = cls._color_placeholders_args(template, *args)
         if kwargs:

@@ -12,7 +12,7 @@ _T_RESULT_ERROR = f"{MSG_ERROR}: {{error}}"
 _T_TESTCASE_LOG = "{result} | {module} | {func_name} | {time}"
 
 _MSG_TOTAL_ALLPASS = "All tests PASSED {passed}/{total} | {time}"
-_T_TOTAL_ALLPASS = TextColors.col_templ(
+_T_TOTAL_ALLPASS = TextColors.col_templ_custom(
     _MSG_TOTAL_ALLPASS,
     passed=TextColors.GREEN,
     total=TextColors.GREEN,
@@ -21,7 +21,7 @@ _T_TOTAL_ALLPASS = TextColors.col_templ(
 _MSG_TOTAL_DEFAULT = (
     "Total: {total} | PASS {passed}, FAIL {failed}, ERROR {error} | {time}"
 )
-_T_TOTAL_DEFAULT = TextColors.col_templ(
+_T_TOTAL_DEFAULT = TextColors.col_templ_custom(
     _MSG_TOTAL_DEFAULT,
     passed=TextColors.GREEN,
     failed=TextColors.RED,
