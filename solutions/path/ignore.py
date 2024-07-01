@@ -16,7 +16,7 @@ class IgnoreManager(Singleton):
         raise NotImplementedError
 
     @staticmethod
-    def _match_pattern(path: Path, pattern: Path) -> bool:
+    def _match_pattern(*, path: Path, pattern: Path) -> bool:
         window_size = len(pattern)
         for i in range(len(path) - window_size + 1):
             if path[i : i + window_size] == pattern:
@@ -62,7 +62,7 @@ class IgnoreManager(Singleton):
 
         return patterns_list
 
-    def is_ignored(self, path: Path) -> bool:
+    def is_ignored(self, *, path: Path) -> bool:
         return any(
             self._match_pattern(path=path, pattern=pattern)
             for pattern in self._ignore_patterns
