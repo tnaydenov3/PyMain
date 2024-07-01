@@ -1,4 +1,5 @@
 from solutions.classes.singleton import Singleton
+from solutions.testing.runner import TestRunner
 from solutions.testing.testcase import PyMainTestCase
 
 
@@ -34,3 +35,7 @@ def test_singleton_diff_class() -> None:
     obj_2 = s_class_two()
 
     assert not obj_1 is obj_2
+
+
+if __name__ == "__main__":
+    TestRunner().run_local(file=__file__)
