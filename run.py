@@ -4,7 +4,7 @@ from solutions.command import CommandCall
 
 
 def main() -> None:
-    args = sys.argv
+    args = sys.argv[1:]
 
     if args:
         CommandCall.call(*args)
